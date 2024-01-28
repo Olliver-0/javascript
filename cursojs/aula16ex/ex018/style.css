@@ -8,10 +8,6 @@ header {
     text-align: center;
 }
 
-select {
-    margin-top: 15px;
-}
-
 section {
     background-color: white;
     border-radius: 10px;
@@ -21,8 +17,8 @@ section {
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
 }
 
-option {
-    width: 175px;
+#flista {
+    width: 150px;
 }
 
 footer {
