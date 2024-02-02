@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+* {
+    margin: 0px;
+    padding: 0px;
+    font: normal 500 1em sans-serif;
+    text-decoration: none;
+}
+
+body {
+    padding: 150px;
+}
+
+main {
+    background-color: #FFBA00;
+    width: 300px;
+    border-radius: 25px;
+    box-shadow: 3px 3px 30px rgba(0, 0, 0, 0.3);
+    margin: auto;
+    <!--padding: 20px;
+    text-align: center;
+}
+
+header {
+    background-color: green;
+    margin-bottom: 20px;
+}
+
+#informacoes {
+    background-color: black;
+}
+
+input {
+    height: 45px;
+    border: none;
+    border-radius: 7px;
+    margin-bottom: 15px;
+    margin-left: 10px;
+}
