@@ -4,5 +4,4 @@ function calcularImc() {
     let peso = parseFloat(document.querySelector('input#numpeso').value)
     let res = document.querySelector('footer#analise')
 
-    
 }
