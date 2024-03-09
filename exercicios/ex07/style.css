@@ -8,40 +8,95 @@
 }
 
 body {
-    background-color: black;
+    background-color: rgb(61, 61, 61);
+    padding-top: 40px;
+}
+
+header h1 {
+    margin-bottom: 10px;
 }
 
 main {
     width: 500px;
     height: 500px;
     margin: auto;
+    border-radius: 4px;
+    padding-top: 10px;
     background-color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+section#smain {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 150px;
+    border-bottom: solid 1px lightgray;
+}
+
+section#sbill  {
+    display: flex;
+    flex-direction: row;
 }
 
 label#lbill {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 21px;
-        height: 21px;
-        margin-right: -5px;
-        border: 1px solid gray;
-        border-radius: none;
-        background-color: lightgray;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+    border-left: 1px solid gray;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    background-color: lightgray;
 }
 
 input#bill {
     width: 350px;
     height: 21px;
-    border-radius: 0%;
+    margin-bottom: 10px;
+    padding: 2px;
+    padding-left: 8px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
     border: 1px solid gray;
+    font-size: 0.8em;
+    color: rgb(61, 61, 61);
 }
 
 input#bill:focus {
     outline: none;
     box-shadow: 0px 0px 6px 2px rgba(85, 159, 255, 0.74);
     transition: box-shadow 0.3s;
+}
+
+section#stip {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    font-size: 0.9em;
+    color: rgb(61, 61, 61);
+}
+
+input#tip {
+    width: 80%;
+}
+
+div#percentage {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+    font-size: 0.8em;
+    color: rgb(61, 61, 61);
+    background-color: lightgray;
+    border: 1px solid gray;
+    border-radius: 4px;
 }

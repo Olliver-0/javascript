@@ -3,19 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Imposto</title>
+    <title>Calculadora de Gorjeta</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <main id="square">
         <header>
-            <h1>Calculadora de Imposto</h1>
+            <h1>Calculadora de Gorjeta</h1>
         </header>
-        <section>
-            <label id="lbill">$</label>
-            <input type="number" name="bill" id="bill">
+        <section id="smain">
+            <section id="sbill">
+                <label id="lbill">$</label>
+                <input type="number" name="bill" id="bill" placeholder="Total da conta">
+            </section>
+            <section id="stip">
+                <label for="ltip">Gorjeta: </label>
+                <input type="range" name="tip" id="tip">
+                <div id="percentage">
+                    
+                </div>
+            </section>
         </section>
-        <footer>
+        <footer id="results">
 
         </footer>
     </main>
