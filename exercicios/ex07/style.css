@@ -1,14 +1,22 @@
 @charset "UTF-8";
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
+
+:root {
+    --color1: lightgray;
+    --color2: gray;
+    --color3: rgb(61, 61, 61);
+}
+
 * {
     margin: 0px;
     padding: 0px;
     text-decoration: none;
-    font: normal 500 1em Arial;
+    font: normal 500 1em 'Roboto Slab';
 }
 
 body {
-    background-color: rgb(61, 61, 61);
+    background-color: var(--color3);
     padding-top: 40px;
 }
 
@@ -18,7 +26,7 @@ header h1 {
 
 main {
     width: 500px;
-    height: 500px;
+    height: 290px;
     margin: auto;
     border-radius: 4px;
     padding-top: 10px;
@@ -32,8 +40,8 @@ main {
 section#smain {
     display: flex;
     flex-direction: column;
-    padding-bottom: 150px;
-    border-bottom: solid 1px lightgray;
+    padding-bottom: 30px;
+    border-bottom: solid 1px var(--color1);
 }
 
 section#sbill  {
@@ -47,12 +55,12 @@ label#lbill {
     justify-content: center;
     width: 25px;
     height: 25px;
-    border-left: 1px solid gray;
-    border-top: 1px solid gray;
-    border-bottom: 1px solid gray;
+    border-left: 1px solid var(--color2);
+    border-top: 1px solid var(--color2);
+    border-bottom: 1px solid var(--color2);
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
-    background-color: lightgray;
+    background-color: var(--color1);
 }
 
 input#bill {
@@ -63,9 +71,9 @@ input#bill {
     padding-left: 8px;
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
-    border: 1px solid gray;
+    border: 1px solid var(--color2);
     font-size: 0.8em;
-    color: rgb(61, 61, 61);
+    color: var(--color3);
 }
 
 input#bill:focus {
@@ -81,7 +89,7 @@ section#stip {
     justify-content: center;
     width: 100%;
     font-size: 0.9em;
-    color: rgb(61, 61, 61);
+    color: var(--color3);
 }
 
 input#tip {
@@ -95,8 +103,94 @@ div#percentage {
     width: 25px;
     height: 25px;
     font-size: 0.8em;
-    color: rgb(61, 61, 61);
-    background-color: lightgray;
-    border: 1px solid gray;
+    color: var(--color3);
+    background-color: var(--color1);
+    border: 1px solid var(--color2);
     border-radius: 4px;
+}
+
+footer#results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+footer > section {
+    margin: 5px;
+    font-size: 0.8em;
+    color: var(--color3);
+}
+
+h2 {
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+section#srestip {
+    display: flex;
+}
+
+label#lrestip {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 13px;
+    padding: 6px;
+    background-color: var(--color1);
+    font-size: 0.9em;
+    color: var(--color3);
+    text-align: center;
+    border-left: 1px solid var(--color2);
+    border-top: 1px solid var(--color2);
+    border-bottom: 1px solid var(--color2);
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+div#restip {
+    display: flex;
+    align-items: center;
+    width: 300px;
+    height: 21px;
+    padding: 2px;
+    padding-left: 8px;
+    border: 1px solid var(--color2);
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    background-color: var(--color1);
+
+}
+
+section#sresbill {
+    display: flex;
+}
+
+label#lresbill {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 13px;
+    padding: 6px;
+    background-color: var(--color1);
+    font-size: 0.9em;
+    color: var(--color3);
+    text-align: center;
+    border-left: 1px solid var(--color2);
+    border-top: 1px solid var(--color2);
+    border-bottom: 1px solid var(--color2);
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+div#resbill {
+    display: flex;
+    align-items: center;
+    width: 244px;
+    height: 21px;
+    padding: 2px;
+    padding-left: 8px;
+    background-color: var(--color1);
+    border: 1px solid var(--color2);
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
 }

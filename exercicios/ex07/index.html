@@ -18,15 +18,28 @@
             </section>
             <section id="stip">
                 <label for="ltip">Gorjeta: </label>
-                <input type="range" name="tip" id="tip">
+                <input type="range" name="tip" id="tip" oninput="percentage()">
                 <div id="percentage">
-                    
+                    0%
                 </div>
             </section>
         </section>
         <footer id="results">
-
+            <h2>Resultado</h2>
+            <section id="srestip">
+                <label for="restip" id="lrestip">Valor da gorjeta</label>
+                <div id="restip">
+                    
+                </div>
+            </section>
+            <section id="sresbill">
+                <label for="resbill" id="lresbill">Valor da conta com gorjeta</label>
+                <div id="resbill">
+                    
+                </div>
+            </section>
         </footer>
     </main>
+    <script src="script.js"></script>
 </body>
 </html>
