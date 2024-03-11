@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
 
 :root {
-    --color1: lightgray;
+    --color1: #EAEBF0;
     --color2: gray;
     --color3: rgb(61, 61, 61);
 }
@@ -100,8 +100,8 @@ div#percentage {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
     font-size: 0.8em;
     color: var(--color3);
     background-color: var(--color1);
