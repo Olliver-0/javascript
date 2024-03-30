@@ -4,11 +4,11 @@ const num = [10, 20, 30, 40, 50]
     console.log(num[i])
 }*/
 
-/*for (n in num) {
+/*for (let n in num) {
     console.log(num[n])
 }*/
 
-for (n of num) {
+for (let n of num) {
     console.log(n)
 }
 
