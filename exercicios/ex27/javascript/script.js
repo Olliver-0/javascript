@@ -1,11 +1,6 @@
 'use strict'
 let questionNumber = document.querySelector('h2#numQuestion')
 let askQuestion = document.querySelector('p#theQuestion')
-// const a1 = document.querySelector('button#a')
-// const a2 = document.querySelector('button#b')
-// const a3 = document.querySelector('button#c')
-// const a4 = document.querySelector('button#d')
-// const a5 = document.querySelector('button#e')
 let answers = [...document.querySelectorAll('button')]
 
 const questionsAnswers = [
@@ -92,31 +87,40 @@ const questionsAnswers = [
 ]
 
 const shuffleArray = array => {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1)); // Escolha um índice aleatório entre 0 e i
-      [array[i], array[j]] = [array[j], array[i]]; // Troque os elementos nas posições i e j
+    for(let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
   }
+
+let num = 1
+let did = []
 
 const doQuestion = () => {
     let randomQuestionIndex = Math.floor(Math.random() * questionsAnswers.length)
     let randomQuestion = questionsAnswers[randomQuestionIndex].question
     let shuffledOptions = shuffleArray(questionsAnswers[randomQuestionIndex].options)
 
-    questionNumber.innerHTML = 'Pergunta 1'
     askQuestion.innerHTML = randomQuestion
     for(let i in shuffledOptions) {
         answers[i].innerHTML = shuffledOptions[i]
     }
+
+    questionNumber.innerHTML = `Pergunta ${num++}`
+
+    did.push({question: randomQuestion, options: shuffledOptions})
 }
 
-let values = []
+const values = [];
 
-const setValues = () => {
-    values.push(button.value)
-    console.log(values)
-}
+answers.forEach(button => {
+    button.addEventListener('click', () => {
+        const selectedOption = button.innerHTML
+        values.push(selectedOption)
+        doQuestion()
+    });
+});
+
 
 window.addEventListener('load', doQuestion())
-button.addEventListener('click', setValues)
