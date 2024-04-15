@@ -82,14 +82,37 @@ const questionsAnswers = [
     },
     {
         question: 'Qual o próximo número da sequência 11, 21, 32, 43, 55, 68...?',
-        options: ['73', '79', '100', '86', 'Impossível de saber']
+        options: ['83', '73', '100', '86', 'Impossível de saber']
     },
+]
+
+const correctAnswers = [
+    'Aproximadamente -13.89',
+    'Cristianismo',
+    'JavaScript',
+    'Americano',
+    '19',
+    'Espanhol',
+    'Milésima ducentésima septuagésima sexta',
+    'Alfa, Beta, Ômega',
+    'Avatar',
+    'longe',
+    'Água',
+    '15',
+    'Matéria',
+    'Chuva',
+    'Tigresa',
+    'Cloaca',
+    'Obsessão',
+    'Traduzir',
+    'https://www.youtube.com',
+    '83'
 ]
 
 const shuffleArray = array => {
     for(let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
   }
@@ -98,29 +121,45 @@ let num = 1
 let did = []
 
 const doQuestion = () => {
-    let randomQuestionIndex = Math.floor(Math.random() * questionsAnswers.length)
-    let randomQuestion = questionsAnswers[randomQuestionIndex].question
-    let shuffledOptions = shuffleArray(questionsAnswers[randomQuestionIndex].options)
-
-    askQuestion.innerHTML = randomQuestion
-    for(let i in shuffledOptions) {
-        answers[i].innerHTML = shuffledOptions[i]
+    if(num > 5) {
+        questionNumber.innerHTML = 'Parabéns! Você completou o quiz!'
+        askQuestion.innerHTML = `Você acertou ${score.length} de ${did.length} perguntas!`
+        answers.forEach(button => {
+            button.style.display = 'none'
+        })
+        return
     }
 
-    questionNumber.innerHTML = `Pergunta ${num++}`
+    let randomQuestionIndex;
+    let randomQuestion;
+    let shuffledOptions;
 
-    did.push({question: randomQuestion, options: shuffledOptions})
+    do {
+        randomQuestionIndex = Math.floor(Math.random() * questionsAnswers.length);
+        randomQuestion = questionsAnswers[randomQuestionIndex].question;
+    } while (did.includes(randomQuestion));
+
+    shuffledOptions = shuffleArray([...questionsAnswers[randomQuestionIndex].options]);
+
+    did.push(randomQuestion);
+
+    askQuestion.innerHTML = randomQuestion;
+    for (let i in shuffledOptions) {
+        answers[i].innerHTML = shuffledOptions[i];
+    }
+
+    questionNumber.innerHTML = `Pergunta ${num++}`;
+    
 }
 
-const values = [];
+const score = []
 
 answers.forEach(button => {
     button.addEventListener('click', () => {
-        const selectedOption = button.innerHTML
-        values.push(selectedOption)
+        if(correctAnswers.includes(button.innerHTML))  
+            score.push(button.innerHTML)
         doQuestion()
     });
 });
-
 
 window.addEventListener('load', doQuestion())
