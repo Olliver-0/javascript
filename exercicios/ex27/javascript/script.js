@@ -6,7 +6,7 @@ let answers = [...document.querySelectorAll('button')]
 const questionsAnswers = [
     {
         question: 'Qual o resultado da expressão: (7 x 2 / (2³ - 8)) / 8² - 14',
-        options: ['Aproximadamente 1.15', '0', 'Aproximadamente -13.89', '0.14', 'inexistente']
+        options: ['Aproximadamente 1.15', '0', 'Aproximadamente -13.89', '0.14', 'Inexistente']
     },
     {
         question: 'O Brasil é mais adepto a qual religião?',
@@ -26,7 +26,7 @@ const questionsAnswers = [
     },
     {
         question: 'O idioma oficial do Peru?',
-        options: ['Espanhol', 'Inglês', 'Frances', 'Peruano', 'Português']
+        options: ['Espanhol', 'Inglês', 'Francês', 'Peruano', 'Português']
     },
     {
         question: 'Como se escreve por extenso a 1276ª posição?',
@@ -34,7 +34,7 @@ const questionsAnswers = [
     },
     {
         question: 'Quais são todos nomes de letras gregas?',
-        options: ['Prime, Celta, A', 'Alfa, Beta, Ômega', 'Celta, Delta, Gama', 'A, O, I', 'Sygma, lambida, zetta']
+        options: ['Prime, Celta, A', 'Alfa, Beta, Ômega', 'Celta, Delta, Gama', 'A, O', 'Sygma, Lambida, Zetta']
     },
     {
         question: 'Qual destes foi o filme com a maior bilheteria história?',
@@ -42,7 +42,7 @@ const questionsAnswers = [
     },
     {
         question: 'Qual é sinônimo de distante?',
-        options: ['Distância', 'Lá', 'longe', 'Avante', 'Perto']
+        options: ['Distância', 'Lá', 'Longe', 'Avante', 'Perto']
     },
     {
         question: 'Líquido vital, incolor e inodoro:',
@@ -70,7 +70,7 @@ const questionsAnswers = [
     },
     {
         question: 'Qual a escrita correta?',
-        options: ['Obsessão', 'Obzessão', 'Obcessão', 'obseção', 'Todas as alternativas estão incorretas']
+        options: ['Obsessão', 'Obzessão', 'Obcessão', 'Obseção', 'Todas as alternativas estão incorretas']
     },
     {
         question: 'O que significa "translate" em inglês?',
@@ -85,7 +85,8 @@ const questionsAnswers = [
         options: ['83', '73', '100', '86', 'Impossível de saber']
     },
 ]
-
+//BARRA DE PROGRESSO??
+//GABARITO??
 const correctAnswers = [
     'Aproximadamente -13.89',
     'Cristianismo',
@@ -96,7 +97,7 @@ const correctAnswers = [
     'Milésima ducentésima septuagésima sexta',
     'Alfa, Beta, Ômega',
     'Avatar',
-    'longe',
+    'Longe',
     'Água',
     '15',
     'Matéria',
