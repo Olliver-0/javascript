@@ -124,9 +124,12 @@ const doQuestion = () => {
     if(num > 5) {
         questionNumber.innerHTML = 'Parabéns! Você completou o quiz!'
         askQuestion.innerHTML = `Você acertou ${score.length} de ${did.length} perguntas!`
+
         answers.forEach(button => {
             button.style.display = 'none'
         })
+
+        document.querySelector('button#resetButton').style.display = 'inline-block'
         return
     }
 
@@ -152,7 +155,7 @@ const doQuestion = () => {
     
 }
 
-const score = []
+let score = []
 
 answers.forEach(button => {
     button.addEventListener('click', () => {
@@ -161,5 +164,18 @@ answers.forEach(button => {
         doQuestion()
     });
 });
+
+const reset = () => {
+    num = 1
+    did = []
+    score = []
+    document.querySelector('button#resetButton').style.display = 'none'
+    answers.forEach(button => {
+        button.style.display = 'inline-block'
+    })
+
+}
+
+document.querySelector('button#resetButton').addEventListener('mouseup', reset)
 
 window.addEventListener('load', doQuestion())
