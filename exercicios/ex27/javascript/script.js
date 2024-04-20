@@ -170,11 +170,10 @@ const reset = () => {
     num = 1
     did = []
     score = []
-    document.querySelector('button#resetButton').style.display = 'none'
     answers.forEach(button => {
         button.style.display = 'inline-block'
     })
-
+    document.querySelector('button#resetButton').style.display = 'none'
 }
 
 document.querySelector('button#resetButton').addEventListener('mouseup', reset)

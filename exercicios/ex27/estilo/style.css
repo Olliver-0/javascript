@@ -1,3 +1,13 @@
+@charset "UTF-8";
+
+:root {
+    --color: #EA7AF4;
+    --color: #B43E8F;
+    --color: #6200B3;
+    --color: #3B0086;
+    --color: #290628;
+}
+
 button#resetButton {
     display: none;
 }
