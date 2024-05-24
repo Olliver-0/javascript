@@ -1,22 +1,13 @@
-const caixa1 = document.querySelector('div#caixa1')
-const caixa2 = document.querySelector('div#caixa2')
-const btn_transferir = document.querySelector('button#btn_transferir')
-const todosCursos = [...document.querySelectorAll('div.curso')]
+const caixa1 = document.querySelector('#caixa1')
+const btn_c1 = document.querySelector('#c1')
+const cursos = [...document.querySelectorAll('.curso')]
 
-todosCursos.forEach(el => {
-    el.addEventListener('click', evt => {
-        const curso = evt.target
-        curso.classList.toggle('selecionado')
-    })
+caixa1.addEventListener('click', () => {
+    console.log('clicou') //Não apenas a div aciona o evento, mas todos os outros elementos dentro dela
 })
 
-btn_transferir.addEventListener('click', () => {
-    const cursosSelecionados = [...document.querySelectorAll('.selecionado')]
-    const cursosNaoSelecionados = [...document.querySelectorAll('.curso:not(.selecionado)')] //Pega dentro dos elementos com a classe cursos, aquelas que não possuem a classe selecionado.
-    cursosSelecionados.forEach(el => {
-        caixa2.appendChild(el)
-    })
-    cursosNaoSelecionados.forEach(el => {
-        caixa1.appendChild(el)
+cursos.forEach(el => {
+    el.addEventListener('click', evt => {
+        evt.stopPropagation() //O método stopPropagation() do addEventListener() é usado para parar a propagação do evento, impedindo que ele faça qualquer coisa mesmo estando na bolha do elemento maior.
     })
 })

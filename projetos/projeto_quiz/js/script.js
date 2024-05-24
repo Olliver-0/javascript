@@ -37,7 +37,7 @@ const questionsAnswers = [
         options: ['Prime, Celta, A', 'Alfa, Beta, Ômega', 'Celta, Delta, Gama', 'A, O', 'Sygma, Lambida, Zetta']
     },
     {
-        question: 'Qual destes foi o filme com a maior bilheteria história?',
+        question: 'Qual destes foi o filme com a maior bilheteria da história?',
         options: ['Avatar', 'Vingadores: Ultimato', 'Vingadores', 'King Kong', 'Matrix']
     },
     {
@@ -118,11 +118,11 @@ const shuffleArray = array => {
     return array;
   }
 
-let num = 1
+let numQ = 1
 let did = []
 
 const doQuestion = () => {
-    if(num > 5) {
+    if(numQ > 5) {
         questionNumber.innerHTML = 'Parabéns! Você completou o quiz!'
         askQuestion.innerHTML = `Você acertou ${score.length} de ${did.length} perguntas!`
 
@@ -152,7 +152,7 @@ const doQuestion = () => {
         answers[i].innerHTML = shuffledOptions[i];
     }
 
-    questionNumber.innerHTML = `Pergunta ${num++}`;
+    questionNumber.innerHTML = `Pergunta ${numQ++}`;
     
 }
 
@@ -160,14 +160,15 @@ let score = []
 
 answers.forEach(button => {
     button.addEventListener('click', () => {
-        if(correctAnswers.includes(button.innerHTML))  
+        if(correctAnswers.includes(button.innerHTML)) { 
             score.push(button.innerHTML)
+        }
         doQuestion()
     });
 });
 
 const reset = () => {
-    num = 1
+    numQ = 1
     did = []
     score = []
     answers.forEach(button => {

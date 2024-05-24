@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 * {
     padding: 0px;
     margin: 0px;
@@ -22,7 +24,7 @@ button {
 
 .curso {
     display: flex;
-    justify-content: center;
+    justify-content: center; 
     width: 200px;
     border: 4px solid #888;
     border-radius: 10px;
