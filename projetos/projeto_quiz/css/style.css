@@ -1,11 +1,53 @@
 @charset "UTF-8";
 
 :root {
-    --color: #EA7AF4;
-    --color: #B43E8F;
-    --color: #6200B3;
-    --color: #3B0086;
-    --color: #290628;
+    --lightpink: #EA7AF4;
+    --pink: #B43E8F;
+    --purple: #6200B3;
+    --purpletransparent: #6200b3d8;
+    --darkpurple: #3B0086;
+    --deeppurple: #290628;
+}
+
+body {
+    background: url(../img/purple_background.png) no-repeat fixed center / cover;
+}
+
+header {
+    background-image: linear-gradient(to bottom, var(--darkpurple), var(--purpletransparent));
+}
+
+h1 {
+    cursor: default;
+}
+
+main {
+    background-image: linear-gradient(to bottom, var(--purpletransparent), var(--deeppurple));
+    box-shadow: 0px 0px 7px 3px rgba(0, 0, 0, 0.3);
+}
+
+section.containers {
+
+}
+
+section#ask {
+    
+}
+
+h2#numQuestion {
+    cursor: default;
+}
+
+p#theQuestion {
+    hyphens: auto;
+}
+
+section#respond {
+    
+}
+
+button.options {
+    cursor: pointer;
 }
 
 button#resetButton {
