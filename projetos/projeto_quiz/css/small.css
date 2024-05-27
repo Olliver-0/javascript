@@ -1,28 +1,16 @@
 @charset "UTF-8";
 
-:root {
-    --lightpink: #EA7AF4;
-    --pink: #B43E8F;
-    --purple: #6200B3;
-    --darkpurple: #3B0086;
-    --deeppurple: #290628;
-}
-
 header {
-    display: flex;
     padding: 15px;
     justify-content: center;
 }
 
 h1 {
-    font: normal 800 2.8em Arial;
+    font: normal 700 2.8em PoetsenOne;
     letter-spacing: 3px;
-    color: var(--lightpink);
-    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
 }
 
 main {
-    display: flex;
     flex-direction: column;
     justify-content: flex-start;
     margin: 45px;
@@ -42,25 +30,30 @@ section#ask {
 
 h2#numQuestion {
     padding-bottom: 18px;
-    font: normal bold 1.8em Arial;
-    color: var(--lightpink);
-    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+    font: normal bold 1.8em RobotoSlab;
 }
 
 p#theQuestion {
-    font: normal bold 1.1em Arial;
-    color: var(--lightpink);
-    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
-}
-
-section#respond {
-
+    font: normal bold 1.1em Rubik;
+    text-wrap: wrap;
 }
 
 button.options {
+    text-wrap: wrap;
+    overflow: hidden;  
     width: 70%;
     height: 55px;
     margin: 10px;
     padding: 9px;
-    font: normal bold 0.8em Arial;
+    font: bold 0.8em Rubik;
+}
+
+button#resetButton {
+    text-wrap: wrap;
+    overflow: hidden;  
+    width: 70%;
+    height: 55px;
+    margin: 10px;
+    padding: 9px;
+    font: bold 1.2em PoetsenOne;
 }

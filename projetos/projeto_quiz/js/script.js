@@ -87,6 +87,8 @@ const questionsAnswers = [
 ]
 //BARRA DE PROGRESSO??
 //GABARITO??
+//DIFERENTES MENSAGENS FINAIS??
+//MAIS PERGUNTAS
 const correctAnswers = [
     'Aproximadamente -13.89',
     'Cristianismo',
