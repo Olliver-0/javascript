@@ -46,7 +46,7 @@ const questionsAnswers = [
     },
     {
         question: 'Líquido vital, incolor e inodoro:',
-        options: ['Sangue', 'H20', 'Oxigênio', 'Vitamina', 'Água']
+        options: ['Sangue', 'H2o', 'Oxigênio', 'Vitamina', 'Água']
     },
     {
         question: 'Qual o número oposto a -15?',
@@ -87,7 +87,6 @@ const questionsAnswers = [
 ]
 //BARRA DE PROGRESSO??
 //GABARITO??
-//DIFERENTES MENSAGENS FINAIS??
 //MAIS PERGUNTAS
 const correctAnswers = [
     'Aproximadamente -13.89',
@@ -124,9 +123,46 @@ let numQ = 1
 let did = []
 
 const doQuestion = () => {
-    if(numQ > 5) {
-        questionNumber.innerHTML = 'Parabéns! Você completou o quiz!'
-        askQuestion.innerHTML = `Você acertou ${score.length} de ${did.length} perguntas!`
+    if(numQ > 10) {
+        // questionNumber.innerHTML = ''
+        questionNumber.innerHTML = 'Parabéns! Você completou o Qui<span>z</span>! <span></span>'
+        switch(score.length) {
+            case 0:
+                askQuestion.innerHTML = 'Você acertou 0 de 10 perguntas. Tente de novo, você vai conseguir!'
+                break;
+            case 1:
+                askQuestion.innerHTML = 'Você acertou apenas 1 de 10 perguntas. Tente de novo, você vai conseguir!'
+                break;
+            case 2:
+                askQuestion.innerHTML = 'Você acertou 2 de 10 perguntas. Não quer tentar mais uma vez?'
+                break;
+            case 3:
+                askQuestion.innerHTML = 'Você acertou 3 de 10 perguntas. Pode fazer melhor!'
+                break;
+            case 4:
+                askQuestion.innerHTML = 'Você acertou 4 de 10 perguntas. Você foi bem!'
+                break;
+            case 5:
+                askQuestion.innerHTML = 'Você acertou 5 de 10 perguntas. Você foi bem!'
+                break;
+            case 6:
+                askQuestion.innerHTML = 'Você acertou 6 de 10 perguntas. Isso foi ótimo!'
+                break;
+            case 7:
+                askQuestion.innerHTML = 'Você acertou 7 de 10 perguntas. É uma boa pontuação!'
+                break;
+            case 8:
+                askQuestion.innerHTML = 'Você acertou 8 de 10 perguntas. Isso foi ótimo!'
+                break;
+            case 9:
+                askQuestion.innerHTML = 'Você acertou 9 de 10 perguntas. Que incrível!'
+                break;
+            case 10:
+                askQuestion.innerHTML = 'Você acertou 10 de 10 perguntas. Parabéns! Você é um gênio!'
+                break;
+            default: 
+                askQuestion.innerHTML = 'Então você respondeu a 11ª pergunta, huh? Bem esperto.'
+        }
 
         answers.forEach(button => {
             button.style.display = 'none'
@@ -154,7 +190,7 @@ const doQuestion = () => {
         answers[i].innerHTML = shuffledOptions[i];
     }
 
-    questionNumber.innerHTML = `Pergunta ${numQ++}`;
+    questionNumber.innerHTML = `Pergunta <span>${numQ++}</span>`;
     
 }
 
