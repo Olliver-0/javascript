@@ -25,6 +25,16 @@
     --yellow: #FDE74C;
 }
 
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 1em;
+	font: inherit;
+	text-decoration: none;
+	vertical-align: baseline;
+}
+
 body {
     background: url(../img/purple_background.png) no-repeat fixed center / cover;
 }
@@ -60,6 +70,11 @@ h2 {
     text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
     color: var(--lightpink);
     cursor: default;
+}
+
+h1 > span, main span {
+    text-shadow: 2px 2px 3px var(--pink);
+    color: var(--yellow);
 }
 
 p#theQuestion {
@@ -99,7 +114,68 @@ footer {
     color: var(--yellow);
 }
 
-span {
-    text-shadow: 2px 2px 3px var(--pink);
+.Btn {
+    margin: auto;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition-duration: .4s;
+    cursor: pointer;
+    position: relative;
+    background-color: var(--deeppurple);
+    overflow: hidden;
+}
+  
+.svgIcon {
+    transition-duration: .3s;
+}
+  
+.svgIcon path {
+    fill: white;
+}
+  
+.text {
+    position: absolute;
+    color: rgb(255, 255, 255);
+    width: 120px;
+    font-weight: 600;
+    opacity: 0;
+    transition-duration: .4s;
+}
+  
+.Btn:hover {
+    width: 110px;
+    transition-duration: .4s;
+    border-radius: 30px;
+}
+  
+.Btn:hover .text {
+    opacity: 1;
+    transition-duration: .4s;
+}
+  
+.Btn:hover .svgIcon {
+    opacity: 0;
+    transition-duration: .3s;
+}
+
+p {
+    font: normal 600 1em Rubik;
+}
+
+a {
+    font: normal 600 1em Rubik;
+}
+
+a:active {
+    color: var(--yellow);
+}
+
+a:visited {
     color: var(--yellow);
 }
