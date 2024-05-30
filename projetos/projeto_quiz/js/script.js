@@ -1,7 +1,7 @@
 'use strict'
-let questionNumber = document.querySelector('h2#numQuestion')
-let askQuestion = document.querySelector('p#theQuestion')
-let answers = [...document.querySelectorAll('button')]
+const questionNumber = document.querySelector('h2#numQuestion')
+const askQuestion = document.querySelector('p#theQuestion')
+const answers = [...document.querySelectorAll('button')]
 
 const questionsAnswers = [
     {
@@ -45,7 +45,7 @@ const questionsAnswers = [
         options: ['Distância', 'Lá', 'Longe', 'Avante', 'Perto']
     },
     {
-        question: 'Líquido vital, incolor e inodoro<span>:</span>',
+        question: 'Líquido vital<span>,</span> incolor e inodoro<span>:</span>',
         options: ['Sangue', 'H2o', 'Oxigênio', 'Vitamina', 'Água']
     },
     {
@@ -57,7 +57,7 @@ const questionsAnswers = [
         options: ['Calor', 'Eletricidade', 'Luz', 'Som', 'Matéria']
     },
     {
-        question: 'O que é o que é... Cai em pé, e corre deitado<span>?</span>',
+        question: 'O que é o que é<span>...</span> Cai em pé<span>,</span> e corre deitado<span>?</span>',
         options: ['Cadeirante', 'Chuva', 'Gato', 'Cobra', 'Carro']
     },
     {
@@ -73,7 +73,7 @@ const questionsAnswers = [
         options: ['Obsessão', 'Obzessão', 'Obcessão', 'Obseção', 'Todas as alternativas estão incorretas']
     },
     {
-        question: 'O que significa "translate" em inglês<span>?</span>',
+        question: 'O que significa <span>"</span>translate<span>"</span> em inglês<span>?</span>',
         options: ['Translação', 'Translatar', 'Transformar', 'Tradução', 'Traduzir']
     },
     {
@@ -81,15 +81,20 @@ const questionsAnswers = [
         options: ['Https://.com.youtube%0&23', 'htps://www.youtube', 'https://www.youtube.com', 'www.com.br', 'www.https://youtube.com//']
     },
     {
-        question: 'Qual o próximo número da sequência 11, 21, 32, 43, 55, 68...<span>?</span>',
+        question: 'Qual o próximo número da sequência 11<span>,</span> 21<span>,</span> 32<span>,</span> 43<span>,</span> 55<span>,</span> 68<span>.</span>..<span>?</span>',
         options: ['83', '73', '100', '86', 'Impossível de saber']
     },
 ]
+
+const secretQuestion = {
+    question: 'Qual o nome do código que você acabou de digitar<span>?</span>',
+    options: ['Código KONAMI', 'The Game Secret Code', 'Código Nintendo', 'Código SEGA', 'Easter Egg'] 
+}
 //BARRA DE PROGRESSO??
 //GABARITO??
 //MAIS PERGUNTAS
-//CÓDIGO KONAMI
 const correctAnswers = [
+    'Código KONAMI',
     'Aproximadamente -13.89',
     'Cristianismo',
     'JavaScript',
@@ -125,46 +130,45 @@ let did = []
 
 const doQuestion = () => {
     if(numQ > 10) {
-        // questionNumber.innerHTML = ''
-        questionNumber.innerHTML = 'Parabéns! Você completou o Qui<span>z</span>! <span></span>'
+        questionNumber.innerHTML = 'Parabéns<span>!</span> Você completou o Qui<span>z!</span> <span></span>'
         switch(score.length) {
             case 0:
-                askQuestion.innerHTML = 'Você acertou 0 de 10 perguntas. Tente de novo, você vai conseguir!'
+                askQuestion.innerHTML = 'Você acertou <span>0</span> de <span>10</span> perguntas<span>.</span> Tente de novo, você vai conseguir<span>!</span>'
                 break;
             case 1:
-                askQuestion.innerHTML = 'Você acertou apenas 1 de 10 perguntas. Tente de novo, você vai conseguir!'
+                askQuestion.innerHTML = 'Você acertou apenas <span>1</span> de <span>10</span> perguntas<span>.</span> Tente de novo, você vai conseguir<span>!</span>'
                 break;
             case 2:
-                askQuestion.innerHTML = 'Você acertou 2 de 10 perguntas. Não quer tentar mais uma vez?'
+                askQuestion.innerHTML = 'Você acertou <span>2</span> de <span>10</span> perguntas<span>.</span> Não quer tentar mais uma vez<span>?</span>'
                 break;
             case 3:
-                askQuestion.innerHTML = 'Você acertou 3 de 10 perguntas. Pode fazer melhor!'
+                askQuestion.innerHTML = 'Você acertou <span>3</span> de <span>10</span> perguntas<span>.</span> Pode fazer melhor<span>!</span>'
                 break;
             case 4:
-                askQuestion.innerHTML = 'Você acertou 4 de 10 perguntas. Você foi bem!'
+                askQuestion.innerHTML = 'Você acertou <span>4</span> de <span>10</span> perguntas<span>.</span> Você foi bem<span>!</span>'
                 break;
             case 5:
-                askQuestion.innerHTML = 'Você acertou 5 de 10 perguntas. Você foi bem!'
+                askQuestion.innerHTML = 'Você acertou <span>5</span> de <span>10</span> perguntas<span>.</span> Você foi bem<span>!</span>'
                 break;
             case 6:
-                askQuestion.innerHTML = 'Você acertou 6 de 10 perguntas. Isso foi ótimo!'
+                askQuestion.innerHTML = 'Você acertou <span>6</span> de <span>10</span> perguntas<span>.</span> Isso foi ótimo<span>!</span>'
                 break;
             case 7:
-                askQuestion.innerHTML = 'Você acertou 7 de 10 perguntas. É uma boa pontuação!'
+                askQuestion.innerHTML = 'Você acertou <span>7</span> de <span>10</span> perguntas<span>.</span> É uma boa pontuação<span>!</span>'
                 break;
             case 8:
-                askQuestion.innerHTML = 'Você acertou 8 de 10 perguntas. Isso foi ótimo!'
+                askQuestion.innerHTML = 'Você acertou <span>8</span> de <span>10</span> perguntas<span>.</span> Isso foi ótimo<span>!</span>'
                 break;
             case 9:
-                askQuestion.innerHTML = 'Você acertou 9 de 10 perguntas. Que incrível!'
+                askQuestion.innerHTML = 'Você acertou <span>9</span> de <span>10</span> perguntas<span>.</span> Que incrível<span>!</span>'
                 break;
             case 10:
-                askQuestion.innerHTML = 'Você acertou 10 de 10 perguntas. Parabéns! Você é um gênio!'
+                askQuestion.innerHTML = 'Você acertou <span>10</span> de <span>10</span> perguntas<span>.</span> Parabéns! Você é um gênio<span>!</span>'
                 break;
             default: 
-                askQuestion.innerHTML = 'Então você encontrou a 11ª pergunta, huh? Bem esperto.'
+                askQuestion.innerHTML = 'Então você encontrou a <span>11ª</span> pergunta<span>,</span> huh<span>?</span> Bem esperto<span>.</span>'
         }
-
+        
         answers.forEach(button => {
             button.style.display = 'none'
         })
@@ -182,16 +186,16 @@ const doQuestion = () => {
         randomQuestion = questionsAnswers[randomQuestionIndex].question;
     } while (did.includes(randomQuestion));
 
-    shuffledOptions = shuffleArray([...questionsAnswers[randomQuestionIndex].options]);
+    shuffledOptions = shuffleArray([...questionsAnswers[randomQuestionIndex].options])
 
-    did.push(randomQuestion);
+    did.push(randomQuestion)
 
     askQuestion.innerHTML = randomQuestion;
     for (let i in shuffledOptions) {
         answers[i].innerHTML = shuffledOptions[i];
     }
 
-    questionNumber.innerHTML = `Pergunta <span>${numQ++}</span>`;
+    questionNumber.innerHTML = `Pergunta <span>${numQ++}</span>`
     
 }
 
@@ -220,19 +224,28 @@ document.querySelector('button#resetButton').addEventListener('mouseup', reset)
 
 window.addEventListener('load', doQuestion())
 
-let teclas = [];
-let sequencia = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a', 'Enter'];
+const teclas = [];
+const sequencia = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a', 'Enter'];
 
 window.addEventListener('keydown', (e) => {
-    teclas.push(e.key);
+    if(did.includes(secretQuestion.question)){
+        return
+    } else {
+        teclas.push(e.key);
 
-    // Se a sequência de teclas for maior que a sequência desejada, remova a primeira tecla
-    if (teclas.length > sequencia.length) {
-        teclas.shift();
+        if (teclas.length > sequencia.length) {
+            teclas.shift();
+        }
+    
+        if (JSON.stringify(teclas) === JSON.stringify(sequencia)) {
+            questionNumber.innerHTML = 'Pergunta <span>11</span>'
+            askQuestion.innerHTML = secretQuestion.question
+            let shuffledSecretOptions =  shuffleArray([...secretQuestion.options])
+            did.push(secretQuestion.question)
+            for (let i in shuffledSecretOptions) {
+                answers[i].innerHTML = shuffledSecretOptions[i]
+            }
+            numQ--
+        }
     }
-
-    if (JSON.stringify(teclas) === JSON.stringify(sequencia)) {
-        doQuestion()
-        // Aqui você pode adicionar o código para acionar o evento DOM que você deseja
-    }
-});
+})
