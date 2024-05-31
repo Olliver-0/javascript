@@ -51,6 +51,11 @@ h1 {
     cursor: default;
 }
 
+h1 > span, main span {
+    text-shadow: 2px 2px 3px var(--pink);
+    color: var(--yellow);
+}
+
 main {
     display: flex;
     background-image: linear-gradient(to bottom, var(--purpletransparent), var(--deeppurple));
@@ -72,11 +77,6 @@ h2 {
     cursor: default;
 }
 
-h1 > span, main span {
-    text-shadow: 2px 2px 3px var(--pink);
-    color: var(--yellow);
-}
-
 p#theQuestion {
     text-align: center;
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
@@ -96,6 +96,8 @@ button.options {
     color: var(--deeppurple);
     cursor: pointer;
 }
+
+button.secret {}
 
 button#resetButton {
     display: none;

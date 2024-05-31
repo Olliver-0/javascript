@@ -1,23 +1,24 @@
-'use strict'
+// 'use strict'
 const questionNumber = document.querySelector('h2#numQuestion')
 const askQuestion = document.querySelector('p#theQuestion')
-const answers = [...document.querySelectorAll('button')]
+const answers = [...document.querySelectorAll('button.options')]
+// const secretAnswers = [...document.querySelectorAll('button.secret')]
 
 const questionsAnswers = [
     {
-        question: 'Qual o resultado da expressão (7 x 2 / (2³ - 8)) / 8² - 14<span>?</span>',
-        options: ['Aproximadamente 1.15', '0', 'Aproximadamente -13.89', '0.14', 'Inexistente']
+        question: 'Qual o resultado da expressão -14+5x(-3²)<span>?</span>',
+        options: ['Aproximadamente 32.15', '0', '-59', '-63', 'Inválido']
     },
     {
         question: 'O Brasil é mais adepto a qual religião<span>?</span>',
         options: ['Catolicismo', 'Cristianismo', 'Criacionismo', 'Jesus', 'O Brasil é ateu']
     },
     {
-        question: 'Em que linguagem de programação este quiz foi desenvolvido<span>?</span>',
-        options: ['JavaScript', 'BASIC', 'Python', 'HTML', 'WEB']
+        question: 'Em que década o primeiro humano pisou na lua<span>?</span>',
+        options: ['90', '80', '70', '60', '50']
     },
     {
-        question: 'Quem nasce nos Estados Unidos da América é<span>:</span>',
+        question: 'Como é chamado quem nasce nos Estados Unidos da América<span>?</span>',
         options: ['Estadunidense', 'Américo', 'Europeu', 'Gringo', 'Americano']
     },
     {
@@ -25,7 +26,7 @@ const questionsAnswers = [
         options: ['19', '5', '7', '11', '17']
     },
     {
-        question: 'O idioma oficial do Peru<span>?</span>',
+        question: 'Qual o idioma oficial do Peru<span>?</span>',
         options: ['Espanhol', 'Inglês', 'Francês', 'Peruano', 'Português']
     },
     {
@@ -45,27 +46,27 @@ const questionsAnswers = [
         options: ['Distância', 'Lá', 'Longe', 'Avante', 'Perto']
     },
     {
-        question: 'Líquido vital<span>,</span> incolor e inodoro<span>:</span>',
-        options: ['Sangue', 'H2o', 'Oxigênio', 'Vitamina', 'Água']
+        question: 'Qual é um líquido vital, incolor e inodoro<span>?</span>',
+        options: ['Sangue', 'H2O2', 'Oxigênio', 'Vitamina', 'Água']
     },
     {
         question: 'Qual o número oposto a -15<span>?</span>',
         options: ['0', '--15', '15', '-30', '150']
     },
     {
-        question: 'Não é energia<span>:</span>',
+        question: 'Qual não é energia<span>?</span>',
         options: ['Calor', 'Eletricidade', 'Luz', 'Som', 'Matéria']
     },
     {
-        question: 'O que é o que é<span>...</span> Cai em pé<span>,</span> e corre deitado<span>?</span>',
-        options: ['Cadeirante', 'Chuva', 'Gato', 'Cobra', 'Carro']
+        question: 'O que é o que é... Cai em pé, e corre deitado<span>?</span>',
+        options: ['Minhoca', 'Chuva', 'Gato', 'Sombra', 'Avião']
     },
     {
         question: 'Qual o feminino de tigre<span>?</span>',
         options: ['Tigresa', 'Tigre', 'Tigrona', 'Tigra', 'Tigrasa']
     },
     {
-        question: 'Não faz parte do corpo humano<span>:</span>',
+        question: 'Qual não faz parte do corpo humano<span>?</span>',
         options: ['Bile', 'Cloaca', 'Hemoglobina', 'Pele', 'Saliva']
     },
     {
@@ -73,7 +74,7 @@ const questionsAnswers = [
         options: ['Obsessão', 'Obzessão', 'Obcessão', 'Obseção', 'Todas as alternativas estão incorretas']
     },
     {
-        question: 'O que significa <span>"</span>translate<span>"</span> em inglês<span>?</span>',
+        question: 'O que significa "translate" em inglês<span>?</span>',
         options: ['Translação', 'Translatar', 'Transformar', 'Tradução', 'Traduzir']
     },
     {
@@ -81,9 +82,21 @@ const questionsAnswers = [
         options: ['Https://.com.youtube%0&23', 'htps://www.youtube', 'https://www.youtube.com', 'www.com.br', 'www.https://youtube.com//']
     },
     {
-        question: 'Qual o próximo número da sequência 11<span>,</span> 21<span>,</span> 32<span>,</span> 43<span>,</span> 55<span>,</span> 68<span>.</span>..<span>?</span>',
+        question: 'Qual o próximo número da sequência [11, 21, 32, 43, 55, 68]<span>?</span>',
         options: ['83', '73', '100', '86', 'Impossível de saber']
     },
+    {
+        question: 'Quem é o ser mitológico egípcio que faz perguntas às pessoas<span>?</span>',
+        options: ['Esfinge', 'Faraó', 'Cleópatra', 'Pirâmide de Gizé', 'Hórus']
+    },
+    {
+        question: 'Quem é Loki<span>?</span>',
+        options: ['Um gigante de gelo', 'Um deus asgardiano', 'Um trapaceiro', 'Um herói', 'Filho de Thor']
+    },
+    {
+        question: 'Durante quanto tempo durou a Guerra dos Cem Anos<span>?</span>',
+        options: ['116 anos', '100 anos', '108 anos', '112 anos', '99 anos']
+    }
 ]
 
 const secretQuestion = {
@@ -95,9 +108,9 @@ const secretQuestion = {
 //MAIS PERGUNTAS
 const correctAnswers = [
     'Código KONAMI',
-    'Aproximadamente -13.89',
+    '-59',
     'Cristianismo',
-    'JavaScript',
+    '60',
     'Americano',
     '19',
     'Espanhol',
@@ -114,7 +127,10 @@ const correctAnswers = [
     'Obsessão',
     'Traduzir',
     'https://www.youtube.com',
-    '83'
+    '83',
+    'Esfinge',
+    'Um gigante de gelo',
+    '116 anos'
 ]
 
 const shuffleArray = array => {
@@ -127,46 +143,61 @@ const shuffleArray = array => {
 
 let numQ = 1
 let did = []
+let randomQuestionIndex;
+let randomQuestion;
+let shuffledOptions;
+
+// if(questionNumber.innerHTML === 'Pergunta <span>11</span>') {
+//     answers.forEach((button) => {
+//         button.classList.remove('options');
+//         button.classList.add('secret');
+//     });
+// } else {
+//     answers.forEach(button => {
+//         button.classList.remove('secret');
+//         button.classList.add('options');
+//     });
+// }
 
 const doQuestion = () => {
     if(numQ > 10) {
         questionNumber.innerHTML = 'Parabéns<span>!</span> Você completou o Qui<span>z!</span> <span></span>'
         switch(score.length) {
             case 0:
-                askQuestion.innerHTML = 'Você acertou <span>0</span> de <span>10</span> perguntas<span>.</span> Tente de novo, você vai conseguir<span>!</span>'
+                askQuestion.innerHTML = 'Você acertou <span>0</span> de <span>10</span> perguntas. Tente de novo, você vai conseguir<span>!</span>'
                 break;
             case 1:
-                askQuestion.innerHTML = 'Você acertou apenas <span>1</span> de <span>10</span> perguntas<span>.</span> Tente de novo, você vai conseguir<span>!</span>'
+                askQuestion.innerHTML = 'Você acertou apenas <span>1</span> de <span>10</span> perguntas. Tente de novo, você vai conseguir<span>!</span>'
                 break;
             case 2:
-                askQuestion.innerHTML = 'Você acertou <span>2</span> de <span>10</span> perguntas<span>.</span> Não quer tentar mais uma vez<span>?</span>'
+                askQuestion.innerHTML = 'Você acertou <span>2</span> de <span>10</span> perguntas. Não quer tentar mais uma vez<span>?</span>'
                 break;
             case 3:
-                askQuestion.innerHTML = 'Você acertou <span>3</span> de <span>10</span> perguntas<span>.</span> Pode fazer melhor<span>!</span>'
+                askQuestion.innerHTML = 'Você acertou <span>3</span> de <span>10</span> perguntas. Pode fazer melhor<span>!</span>'
                 break;
             case 4:
-                askQuestion.innerHTML = 'Você acertou <span>4</span> de <span>10</span> perguntas<span>.</span> Você foi bem<span>!</span>'
+                askQuestion.innerHTML = 'Você acertou <span>4</span> de <span>10</span> perguntas. Você foi bem<span>!</span>'
                 break;
             case 5:
-                askQuestion.innerHTML = 'Você acertou <span>5</span> de <span>10</span> perguntas<span>.</span> Você foi bem<span>!</span>'
+                askQuestion.innerHTML = 'Você acertou <span>5</span> de <span>10</span> perguntas. Você foi bem<span>!</span>'
                 break;
             case 6:
-                askQuestion.innerHTML = 'Você acertou <span>6</span> de <span>10</span> perguntas<span>.</span> Isso foi ótimo<span>!</span>'
+                askQuestion.innerHTML = 'Você acertou <span>6</span> de <span>10</span> perguntas. Isso foi ótimo<span>!</span>'
                 break;
             case 7:
-                askQuestion.innerHTML = 'Você acertou <span>7</span> de <span>10</span> perguntas<span>.</span> É uma boa pontuação<span>!</span>'
+                askQuestion.innerHTML = 'Você acertou <span>7</span> de <span>10</span> perguntas. É uma boa pontuação<span>!</span>'
                 break;
             case 8:
-                askQuestion.innerHTML = 'Você acertou <span>8</span> de <span>10</span> perguntas<span>.</span> Isso foi ótimo<span>!</span>'
+                askQuestion.innerHTML = 'Você acertou <span>8</span> de <span>10</span> perguntas. Isso foi ótimo<span>!</span>'
                 break;
             case 9:
-                askQuestion.innerHTML = 'Você acertou <span>9</span> de <span>10</span> perguntas<span>.</span> Que incrível<span>!</span>'
+                askQuestion.innerHTML = 'Você acertou <span>9</span> de <span>10</span> perguntas. Que incrível<span>!</span>'
                 break;
             case 10:
-                askQuestion.innerHTML = 'Você acertou <span>10</span> de <span>10</span> perguntas<span>.</span> Parabéns! Você é um gênio<span>!</span>'
+                askQuestion.innerHTML = 'Você acertou <span>10</span> de <span>10</span> perguntas. Parabéns! Você é um gênio<span>!</span>'
                 break;
             default: 
-                askQuestion.innerHTML = 'Então você encontrou a <span>11ª</span> pergunta<span>,</span> huh<span>?</span> Bem esperto<span>.</span>'
+                askQuestion.innerHTML = 'Você acertou <span>11</span> de <span>10</span> perguntas. Insano! Então você encontrou a Pergunta <span>11</span>... Bem esperto<span>!</span>'
         }
         
         answers.forEach(button => {
@@ -177,10 +208,6 @@ const doQuestion = () => {
         return
     }
 
-    let randomQuestionIndex;
-    let randomQuestion;
-    let shuffledOptions;
-
     do {
         randomQuestionIndex = Math.floor(Math.random() * questionsAnswers.length);
         randomQuestion = questionsAnswers[randomQuestionIndex].question;
@@ -188,27 +215,59 @@ const doQuestion = () => {
 
     shuffledOptions = shuffleArray([...questionsAnswers[randomQuestionIndex].options])
 
-    did.push(randomQuestion)
+    //
 
     askQuestion.innerHTML = randomQuestion;
     for (let i in shuffledOptions) {
         answers[i].innerHTML = shuffledOptions[i];
     }
 
-    questionNumber.innerHTML = `Pergunta <span>${numQ++}</span>`
+    // if(askQuestion.innerHTML == 'Qual o nome do código que você acabou de digitar<span>?</span>') {
+    //     secretAnswers.forEach(button => {
+    //         button.classList.add('secret')
+    //         button.classList.remove('options')
+    //     })
+    // }
     
+    // secretAnswers.forEach(button => {
+    //     button.addEventListener('click', () => {
+    //         if(correctAnswers.includes(button.innerHTML)) {
+    //             score.push(button.innerHTML)
+    //         }
+    //         doQuestion()
+    //         secretAnswers.forEach(button => {
+    //             button.classList.remove('secret')
+    //             button.classList.add('options')
+    //         })
+    //     })
+    // })
+
+    
+
+    questionNumber.innerHTML = `Pergunta <span>${numQ++}</span>`
 }
 
 let score = []
+const totalQuestions = 10
+
+const progress = () => {
+    const newWidth = (did.length / totalQuestions) * 100;
+    document.querySelector('div#inProgressBar').style.width = `${newWidth}%`
+    
+}
+
+
 
 answers.forEach(button => {
     button.addEventListener('click', () => {
         if(correctAnswers.includes(button.innerHTML)) { 
             score.push(button.innerHTML)
         }
+        did.push(randomQuestion)
         doQuestion()
-    });
-});
+        progress()
+    })
+})
 
 const reset = () => {
     numQ = 1
@@ -218,6 +277,8 @@ const reset = () => {
         button.style.display = 'inline-block'
     })
     document.querySelector('button#resetButton').style.display = 'none'
+    doQuestion()
+    progress()
 }
 
 document.querySelector('button#resetButton').addEventListener('mouseup', reset)
@@ -227,8 +288,10 @@ window.addEventListener('load', doQuestion())
 const teclas = [];
 const sequencia = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a', 'Enter'];
 
+let didSecret = []
+
 window.addEventListener('keydown', (e) => {
-    if(did.includes(secretQuestion.question)){
+    if(didSecret.includes(secretQuestion.question)){
         return
     } else {
         teclas.push(e.key);
@@ -236,12 +299,13 @@ window.addEventListener('keydown', (e) => {
         if (teclas.length > sequencia.length) {
             teclas.shift();
         }
-    
+
         if (JSON.stringify(teclas) === JSON.stringify(sequencia)) {
             questionNumber.innerHTML = 'Pergunta <span>11</span>'
             askQuestion.innerHTML = secretQuestion.question
             let shuffledSecretOptions =  shuffleArray([...secretQuestion.options])
-            did.push(secretQuestion.question)
+            
+            didSecret.push(secretQuestion.question)
             for (let i in shuffledSecretOptions) {
                 answers[i].innerHTML = shuffledSecretOptions[i]
             }
