@@ -56,6 +56,31 @@ h1 > span, main span {
     color: var(--yellow);
 }
 
+aside {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    width: 80%;
+    height: 40px;
+}
+
+div#exProgressBar {
+    width: 100%;
+    height: 25px;
+    overflow: hidden;
+    background-color: var(--purple);
+    border: 3px solid var(--deeppurple);
+    border-radius: 25px;
+  }
+  
+  div#inProgressBar {
+    width: 0%;
+    height: 25px;
+    background-image: linear-gradient(to bottom, var(--yellow), var(--lightpink));
+    border-radius: 25px;
+    transition: width 1s ease-out;
+  }
+
 main {
     display: flex;
     background-image: linear-gradient(to bottom, var(--purpletransparent), var(--deeppurple));
@@ -97,7 +122,7 @@ button.options {
     cursor: pointer;
 }
 
-button.secret {}
+/* button.secret {} */
 
 button#resetButton {
     display: none;
@@ -107,6 +132,17 @@ button#resetButton {
     overflow: hidden;  
     text-shadow: 0px 0px 10px var(--pink);
     color: var(--lightpink);
+    cursor: pointer;
+}
+
+button#feedback {
+    display: none;
+    background-color: var(--lightpink);
+    border: 4px solid var(--pink);
+    border-radius: 14px;
+    overflow: hidden;  
+    text-shadow: 0px 0px 10px var(--pink);
+    color: var(--purple);
     cursor: pointer;
 }
 

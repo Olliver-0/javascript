@@ -2,6 +2,7 @@
 const questionNumber = document.querySelector('h2#numQuestion')
 const askQuestion = document.querySelector('p#theQuestion')
 const answers = [...document.querySelectorAll('button.options')]
+const mainSection = document.querySelector('section#respond')
 // const secretAnswers = [...document.querySelectorAll('button.secret')]
 
 const questionsAnswers = [
@@ -99,15 +100,16 @@ const questionsAnswers = [
     }
 ]
 
-const secretQuestion = {
-    question: 'Qual o nome do código que você acabou de digitar<span>?</span>',
-    options: ['Código KONAMI', 'The Game Secret Code', 'Código Nintendo', 'Código SEGA', 'Easter Egg'] 
-}
-//BARRA DE PROGRESSO??
 //GABARITO??
 //MAIS PERGUNTAS
+
+// const secretQuestion = {
+//     question: 'Qual o nome do código que você acabou de digitar<span>?</span>',
+//     options: ['Código KONAMI', 'The Game Secret Code', 'Código Nintendo', 'Código SEGA', 'Easter Egg'] 
+// }
+
 const correctAnswers = [
-    'Código KONAMI',
+    // 'Código KONAMI',
     '-59',
     'Cristianismo',
     '60',
@@ -197,7 +199,7 @@ const doQuestion = () => {
                 askQuestion.innerHTML = 'Você acertou <span>10</span> de <span>10</span> perguntas. Parabéns! Você é um gênio<span>!</span>'
                 break;
             default: 
-                askQuestion.innerHTML = 'Você acertou <span>11</span> de <span>10</span> perguntas. Insano! Então você encontrou a Pergunta <span>11</span>... Bem esperto<span>!</span>'
+                askQuestion.innerHTML = 'ERRO. REINICIE O SITE'/* 'Você acertou <span>11</span> de <span>10</span> perguntas. Insano! Então você encontrou a Pergunta <span>11</span>... Bem esperto<span>!</span>' */
         }
         
         answers.forEach(button => {
@@ -205,6 +207,7 @@ const doQuestion = () => {
         })
 
         document.querySelector('button#resetButton').style.display = 'inline-block'
+        document.querySelector('button#feedback').style.display = 'inline-block'
         return
     }
 
@@ -247,6 +250,8 @@ const doQuestion = () => {
     questionNumber.innerHTML = `Pergunta <span>${numQ++}</span>`
 }
 
+window.addEventListener('load', doQuestion())
+
 let score = []
 const totalQuestions = 10
 
@@ -255,8 +260,6 @@ const progress = () => {
     document.querySelector('div#inProgressBar').style.width = `${newWidth}%`
     
 }
-
-
 
 answers.forEach(button => {
     button.addEventListener('click', () => {
@@ -277,39 +280,50 @@ const reset = () => {
         button.style.display = 'inline-block'
     })
     document.querySelector('button#resetButton').style.display = 'none'
+    document.querySelector('button#feedback').style.display = 'none'
     doQuestion()
     progress()
 }
 
 document.querySelector('button#resetButton').addEventListener('mouseup', reset)
 
-window.addEventListener('load', doQuestion())
+const feedback = () => {
+    questionNumber.innerHTML = 'Gabarito'
+    askQuestion.innerHTML = 'Estes foram seus acertos e erros<span>:</span>'
+    document.querySelector('button#feedback').style.display = 'none'
+    const fdbck = document.createElement('p')
+    fdbck.innerHTML = 'teste'
+    // const rightAndWrong 
+    mainSection.prepend(fdbck)
+}
 
-const teclas = [];
-const sequencia = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a', 'Enter'];
+document.querySelector('button#feedback').addEventListener('mouseup', feedback)
 
-let didSecret = []
+// const teclas = [];
+// const sequencia = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a', 'Enter'];
 
-window.addEventListener('keydown', (e) => {
-    if(didSecret.includes(secretQuestion.question)){
-        return
-    } else {
-        teclas.push(e.key);
+// let didSecret = []
 
-        if (teclas.length > sequencia.length) {
-            teclas.shift();
-        }
+// window.addEventListener('keydown', (e) => {
+//     if(didSecret.includes(secretQuestion.question)){
+//         return
+//     } else {
+//         teclas.push(e.key);
 
-        if (JSON.stringify(teclas) === JSON.stringify(sequencia)) {
-            questionNumber.innerHTML = 'Pergunta <span>11</span>'
-            askQuestion.innerHTML = secretQuestion.question
-            let shuffledSecretOptions =  shuffleArray([...secretQuestion.options])
+//         if (teclas.length > sequencia.length) {
+//             teclas.shift();
+//         }
+
+//         if (JSON.stringify(teclas) === JSON.stringify(sequencia)) {
+//             questionNumber.innerHTML = 'Pergunta <span>11</span>'
+//             askQuestion.innerHTML = secretQuestion.question
+//             let shuffledSecretOptions =  shuffleArray([...secretQuestion.options])
             
-            didSecret.push(secretQuestion.question)
-            for (let i in shuffledSecretOptions) {
-                answers[i].innerHTML = shuffledSecretOptions[i]
-            }
-            numQ--
-        }
-    }
-})
+//             didSecret.push(secretQuestion.question)
+//             for (let i in shuffledSecretOptions) {
+//                 answers[i].innerHTML = shuffledSecretOptions[i]
+//             }
+//             numQ--
+//         }
+//     }
+// })
