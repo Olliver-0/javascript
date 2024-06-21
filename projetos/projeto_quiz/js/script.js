@@ -1,11 +1,12 @@
 'use strict'
 function start() {
     //Armazena principais campos e botões.
-    const currentQNum = document.querySelector('h2#QNumuestion')
+    const currentQNum = document.querySelector('h2#questionNumber')
     const askQ = document.querySelector('p#theQuestion')
-    const answers = [...document.querySelectorAll('button.options')]
+    let optsBtns = [...document.querySelectorAll('button.options')]
     const mainSect = document.querySelector('section#respond')
-    // const secretAnswers = [...document.querySelectorAll('button.secret')]
+    let resetBtn
+    let feedbackBtn
     //Contém todas as perguntas e opções.
     const qAnswers = [
         {
@@ -104,12 +105,7 @@ function start() {
 
     //GABARITO??
     //MAIS PERGUNTAS
-    //Trocar as mudanças de css por createElements
 
-    // const secretQuestion = {
-    //     question: 'Qual o nome do código que você acabou de digitar<span>?</span>',
-    //     options: ['Código KONAMI', 'The Game Secret Code', 'Código Nintendo', 'Código SEGA', 'Easter Egg'] 
-    // }
     //Contém todas as respotas corretas.
     const correctAnswers = [
         // 'Código KONAMI',
@@ -138,7 +134,7 @@ function start() {
         '116 anos'
     ]
     //Função para embaralhar as opções
-    const mixOpt = array => {
+    const mixOpts = array => {
         for(let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [array[i], array[j]] = [array[j], array[i]];
@@ -146,25 +142,15 @@ function start() {
         return array;
     }
 
-    let QNum = 1
+    let qNum = 1
     let qDid = []
-    let randomQIndex;
-    let randomQ;
-    let mixedOpt;
-    // if(currentQNum.innerHTML === 'Pergunta <span>11</span>') {
-    //     answers.forEach((button) => {
-    //         button.classList.remove('options');
-    //         button.classList.add('secret');
-    //     });
-    // } else {
-    //     answers.forEach(button => {
-    //         button.classList.remove('secret');
-    //         button.classList.add('options');
-    //     });
-    // }
+    let randomQIndex
+    let randomQ
+    let mixedOpts = []
+
     //Principal função. Faz uma pergunta aleatória e a coloca na tela com suas opções embaralhadas, também analisa se o quiz já foi finalizado, e mostra a tela final de conclusão do quiz.
     const doQuestion = () => {
-        if(QNum > 10) { //Verifica se o quiz já foi finalizado.
+        if(qNum > 10) { //Verifica se o quiz já foi finalizado.
             currentQNum.innerHTML = 'Parabéns<span>!</span> Você completou o Qui<span>z!</span> <span></span>'
             switch(score.length) { //Mensagens de conclusão do quiz
                 case 0:
@@ -203,13 +189,22 @@ function start() {
                 default: 
                     askQ.innerHTML = 'ERRO. REINICIE O SITE'/* 'Você acertou <span>11</span> de <span>10</span> perguntas. Insano! Então você encontrou a Pergunta <span>11</span>... Bem esperto<span>!</span>' */
             }
-            
-            answers.forEach(button => {
-                button.style.display = 'none'
-            })
 
-            document.querySelector('button#resetButton').style.display = 'inline-block'
-            document.querySelector('button#feedback').style.display = 'inline-block'
+            resetBtn = document.createElement('button')
+            resetBtn.setAttribute('id', 'resetButton')
+            resetBtn.innerHTML = 'Reiniciar'
+            resetBtn.addEventListener('mouseup', reset)
+            mainSect.appendChild(resetBtn)
+
+            feedbackBtn = document.createElement('button')
+            feedbackBtn.setAttribute('id', 'feedback')
+            feedbackBtn.innerHTML = 'Gabarito'
+            feedbackBtn.addEventListener('mouseup', feedback)
+            mainSect.appendChild(feedbackBtn)
+
+            optsBtns.forEach(button => {
+                button.remove()
+            })
             return
         }
 
@@ -218,34 +213,14 @@ function start() {
             randomQ = qAnswers[randomQIndex].question;
         } while (qDid.includes(randomQ));
 
-        mixedOpt = mixOpt([...qAnswers[randomQIndex].options])
-        
-        //Opções embaralhadas
+        //Opções embaralhadas.
+        mixedOpts = mixOpts([...qAnswers[randomQIndex].options])
         askQ.innerHTML = randomQ;
-        for (let i in mixedOpt) {
-            answers[i].innerHTML = mixedOpt[i];
+        for (let i in mixedOpts) {
+            optsBtns[i].innerHTML = mixedOpts[i]
         }
 
-        // if(askQ.innerHTML == 'Qual o nome do código que você acabou de digitar<span>?</span>') {
-        //     secretAnswers.forEach(button => {
-        //         button.classList.add('secret')
-        //         button.classList.remove('options')
-        //     })
-        // }
-        
-        // secretAnswers.forEach(button => {
-        //     button.addEventListener('click', () => {
-        //         if(correctAnswers.includes(button.innerHTML)) {
-        //             score.push(button.innerHTML)
-        //         }
-        //         doQuestion()
-        //         secretAnswers.forEach(button => {
-        //             button.classList.remove('secret')
-        //             button.classList.add('options')
-        //         })
-        //     })
-        // })
-        currentQNum.innerHTML = `Pergunta <span>${QNum++}</span>`
+        currentQNum.innerHTML = `Pergunta <span>${qNum++}</span>`
     }
 
     window.addEventListener('load', doQuestion())
@@ -260,33 +235,43 @@ function start() {
         
     }
 
-    //Event listener para guardar os dados de pergunta e resposta, avançar para a próxima pergunta e também a barra de progresso.
-    answers.forEach(button => {
-        button.addEventListener('click', () => {
-            if(correctAnswers.includes(button.innerHTML)) { 
-                score.push(button.innerHTML)
-            }
-            qDid.push(randomQ)
-            doQuestion()
-            progress()
-        })
-    })
-
-    //Função para resetar o quiz, limpando dados armazenados.
-    const reset = () => {
-        QNum = 1
-        qDid = []
-        score = []
-        answers.forEach(button => {
-            button.style.display = 'inline-block'
-        })
-        document.querySelector('button#resetButton').style.display = 'none'
-        document.querySelector('button#feedback').style.display = 'none'
+    //Função com event listener para guardar os dados de pergunta e resposta, avançar para a próxima pergunta e também a barra de progresso.
+    const handleOptsClick = button => {
+        if(correctAnswers.includes(button.innerHTML)) {
+            score.push(button.innerHTML)
+        }
+        qDid.push(randomQ)
         doQuestion()
         progress()
     }
 
-    document.querySelector('button#resetButton').addEventListener('mouseup', reset)
+    optsBtns.forEach(button => {
+        button.addEventListener('click', () => handleOptsClick(button))
+    })
+
+    //Função para resetar o quiz, limpando dados armazenados.
+    const reset = () => {
+        qNum = 1
+        qDid = []
+        score = []
+        
+        optsBtns.forEach(button => button.remove())
+        optsBtns = []
+
+        for(let i = 0; i < 5; i++) {
+            let btn = document.createElement('button')
+            btn.className = 'options'
+            btn.addEventListener('click', () => handleOptsClick(btn))
+            optsBtns.push(btn)
+            mainSect.appendChild(btn)
+        }
+
+        resetBtn.remove()
+        feedbackBtn.remove()
+
+        doQuestion()
+        progress()
+    }
 
     //Função para gerar o gabarito
     const feedback = () => {
@@ -299,7 +284,7 @@ function start() {
         mainSect.prepend(fdbck)
     }
 
-    document.querySelector('button#feedback').addEventListener('mouseup', feedback)
+    // document.querySelector('button#feedback').addEventListener('mouseup', feedback)
 
     // const teclas = [];
     // const sequencia = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a', 'Enter'];
@@ -319,7 +304,7 @@ function start() {
     //         if (JSON.stringify(teclas) === JSON.stringify(sequencia)) {
     //             currentQNum.innerHTML = 'Pergunta <span>11</span>'
     //             askQ.innerHTML = secretQuestion.question
-    //             let shuffledSecretOptions =  mixOpt([...secretQuestion.options])
+    //             let shuffledSecretOptions =  mixOpts([...secretQuestion.options])
                 
     //             qDidSecret.push(secretQuestion.question)
     //             for (let i in shuffledSecretOptions) {
