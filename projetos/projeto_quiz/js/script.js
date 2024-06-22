@@ -1,14 +1,29 @@
 'use strict'
 function start() {
-    //Armazena principais campos e botões.
-    const currentQNum = document.querySelector('h2#questionNumber')
-    const askQ = document.querySelector('p#theQuestion')
-    let optsBtns = [...document.querySelectorAll('button.options')]
-    const mainSect = document.querySelector('section#respond')
+    //GABARITO??
+    //MAIS PERGUNTAS
+
+    //Função para embaralhar as opções
+    const mixOpts = array => {
+        for(let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    let mixedOpts = []
     let resetBtn
     let feedbackBtn
-    //Contém todas as perguntas e opções.
-    const qAnswers = [
+    let qNum = 1
+    let qDid = []
+    let randomQIndex
+    let randomQ
+    let optsBtns = [...document.querySelectorAll('button.options')]
+    const currentQNum = document.querySelector('h2#questionNumber')
+    const question = document.querySelector('p#theQuestion')
+    const mainSect = document.querySelector('section#respond')
+    const qAnswers = [ //Contém todas as perguntas e opções.
         {
             question: 'Qual o resultado da expressão -14+5x(-3²)<span>?</span>',
             options: ['Aproximadamente 32.15', '0', '-59', '-63', 'Inválido']
@@ -86,8 +101,8 @@ function start() {
             options: ['Https://.com.youtube%0&23', 'htps://www.youtube', 'https://www.youtube.com', 'www.com.br', 'www.https://youtube.com//']
         },
         {
-            question: 'Qual o próximo número da sequência [11, 21, 32, 43, 55, 68]<span>?</span>',
-            options: ['83', '73', '100', '86', 'Impossível de saber']
+            question: 'Qual o próximo número da sequência [12, 25, 40, 57, 78, 101]<span>?</span>',
+            options: ['111', '123', '128', '130', 'Impossível saber']
         },
         {
             question: 'Quem é o ser mitológico egípcio que faz perguntas às pessoas<span>?</span>',
@@ -100,15 +115,38 @@ function start() {
         {
             question: 'Durante quanto tempo durou a Guerra dos Cem Anos<span>?</span>',
             options: ['116 anos', '100 anos', '108 anos', '112 anos', '99 anos']
-        }
+        },
+        {
+            question: 'Normalmente, quantos litros de sangue uma pessoa tem<span>?</span>',
+            options: ['1 a 2 litros', '3 litros', '4 a 6 litros', '5000ml', '6 a 7,5 litros']
+        },
+        {
+            question: 'De quem é a famosa frase “Penso, logo existo”<span>?</span>',
+            options: ['René Descartes', 'Sócrates', 'Aristóteles', 'Plutão', 'Émile Durkheim']
+        },
+        {
+            question: 'Quais o menor e o maior país do mundo<span>?</span>',
+            options: ['Vaticano e Rússia', 'Portugal e China', 'Mônaco e China', 'China e Mônaco', 'Noruega e Brasil']
+        },
+        {
+            question: 'Quais o segundo livro mais vendido do mundo<span>?</span>',
+            options: ['Bíblia', 'Dom Quixote', 'A Arte da Guerra', 'Torá', 'Barsa']
+        },
+        {
+            question: 'Quantas casas decimais tem o número pi<span>?</span>',
+            options: ['Infinitas', 'Nenhuma', '2', '4', '138235']
+        },
+        {
+            question: 'Atualmente, quantos elementos químicos a tabela periódica possui<span>?</span>',
+            options: ['118', '100', '96', '50', '500']
+        },
+        {
+            question: 'Qual país tem a maior expectativa de vida do mundo<span>?</span>',
+            options: ['Coreia', 'Canadá', 'Serra Leoa', 'Europa', 'Japão']
+        },
+        
     ]
-
-    //GABARITO??
-    //MAIS PERGUNTAS
-
-    //Contém todas as respotas corretas.
-    const correctAnswers = [
-        // 'Código KONAMI',
+    const correctAnswers = [ //Contém todas as respotas corretas.
         '-59',
         'Cristianismo',
         '60',
@@ -128,66 +166,58 @@ function start() {
         'Obsessão',
         'Traduzir',
         'https://www.youtube.com',
-        '83',
+        '128',
         'Esfinge',
         'Um gigante de gelo',
-        '116 anos'
+        '116 anos',
+        '4 a 6 litros',
+        'René Descartes',
+        'Vaticano e Rússia',
+        'Dom Quixote',
+        'Infinitas',
+        '118',
+        'Japão'
     ]
-    //Função para embaralhar as opções
-    const mixOpts = array => {
-        for(let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
-    }
-
-    let qNum = 1
-    let qDid = []
-    let randomQIndex
-    let randomQ
-    let mixedOpts = []
-
     //Principal função. Faz uma pergunta aleatória e a coloca na tela com suas opções embaralhadas, também analisa se o quiz já foi finalizado, e mostra a tela final de conclusão do quiz.
     const doQuestion = () => {
         if(qNum > 10) { //Verifica se o quiz já foi finalizado.
             currentQNum.innerHTML = 'Parabéns<span>!</span> Você completou o Qui<span>z!</span> <span></span>'
             switch(score.length) { //Mensagens de conclusão do quiz
                 case 0:
-                    askQ.innerHTML = 'Você acertou <span>0</span> de <span>10</span> perguntas. Tente de novo, você vai conseguir<span>!</span>'
-                    break;
+                    question.innerHTML = 'Você acertou <span>0</span> de <span>10</span> perguntas. Tente de novo, você vai conseguir<span>!</span>'
+                    break
                 case 1:
-                    askQ.innerHTML = 'Você acertou apenas <span>1</span> de <span>10</span> perguntas. Tente de novo, você vai conseguir<span>!</span>'
-                    break;
+                    question.innerHTML = 'Você acertou apenas <span>1</span> de <span>10</span> perguntas. Tente de novo, você vai conseguir<span>!</span>'
+                    break
                 case 2:
-                    askQ.innerHTML = 'Você acertou <span>2</span> de <span>10</span> perguntas. Não quer tentar mais uma vez<span>?</span>'
-                    break;
+                    question.innerHTML = 'Você acertou <span>2</span> de <span>10</span> perguntas. Não quer tentar mais uma vez<span>?</span>'
+                    break
                 case 3:
-                    askQ.innerHTML = 'Você acertou <span>3</span> de <span>10</span> perguntas. Pode fazer melhor<span>!</span>'
-                    break;
+                    question.innerHTML = 'Você acertou <span>3</span> de <span>10</span> perguntas. Pode fazer melhor<span>!</span>'
+                    break
                 case 4:
-                    askQ.innerHTML = 'Você acertou <span>4</span> de <span>10</span> perguntas. Você foi bem<span>!</span>'
-                    break;
+                    question.innerHTML = 'Você acertou <span>4</span> de <span>10</span> perguntas. Você foi bem<span>!</span>'
+                    break
                 case 5:
-                    askQ.innerHTML = 'Você acertou <span>5</span> de <span>10</span> perguntas. Você foi bem<span>!</span>'
-                    break;
+                    question.innerHTML = 'Você acertou <span>5</span> de <span>10</span> perguntas. Você foi bem<span>!</span>'
+                    break
                 case 6:
-                    askQ.innerHTML = 'Você acertou <span>6</span> de <span>10</span> perguntas. Isso foi ótimo<span>!</span>'
-                    break;
+                    question.innerHTML = 'Você acertou <span>6</span> de <span>10</span> perguntas. Isso foi ótimo<span>!</span>'
+                    break
                 case 7:
-                    askQ.innerHTML = 'Você acertou <span>7</span> de <span>10</span> perguntas. É uma boa pontuação<span>!</span>'
-                    break;
+                    question.innerHTML = 'Você acertou <span>7</span> de <span>10</span> perguntas. É uma boa pontuação<span>!</span>'
+                    break
                 case 8:
-                    askQ.innerHTML = 'Você acertou <span>8</span> de <span>10</span> perguntas. Isso foi ótimo<span>!</span>'
-                    break;
+                    question.innerHTML = 'Você acertou <span>8</span> de <span>10</span> perguntas. Isso foi ótimo<span>!</span>'
+                    break
                 case 9:
-                    askQ.innerHTML = 'Você acertou <span>9</span> de <span>10</span> perguntas. Que incrível<span>!</span>'
-                    break;
+                    question.innerHTML = 'Você acertou <span>9</span> de <span>10</span> perguntas. Que incrível<span>!</span>'
+                    break
                 case 10:
-                    askQ.innerHTML = 'Você acertou <span>10</span> de <span>10</span> perguntas. Você é um gênio<span>!</span>'
-                    break;
+                    question.innerHTML = 'Você acertou <span>10</span> de <span>10</span> perguntas. Você é um gênio<span>!</span>'
+                    break
                 default: 
-                    askQ.innerHTML = 'ERRO. REINICIE O SITE'/* 'Você acertou <span>11</span> de <span>10</span> perguntas. Insano! Então você encontrou a Pergunta <span>11</span>... Bem esperto<span>!</span>' */
+                    question.innerHTML = 'ERRO. REINICIE O SITE'/* 'Você acertou <span>11</span> de <span>10</span> perguntas. Insano! Então você encontrou a Pergunta <span>11</span>... Bem esperto<span>!</span>' */
             }
 
             resetBtn = document.createElement('button')
@@ -215,7 +245,7 @@ function start() {
 
         //Opções embaralhadas.
         mixedOpts = mixOpts([...qAnswers[randomQIndex].options])
-        askQ.innerHTML = randomQ;
+        question.innerHTML = randomQ;
         for (let i in mixedOpts) {
             optsBtns[i].innerHTML = mixedOpts[i]
         }
@@ -223,11 +253,9 @@ function start() {
         currentQNum.innerHTML = `Pergunta <span>${qNum++}</span>`
     }
 
-    window.addEventListener('load', doQuestion())
+    window.addEventListener('load', doQuestion)
 
-    let score = []
     const totalQ = 10
-
     //Função para avançar a barra de progresso a cada pergunta respondida.
     const progress = () => {
         const newWidth = (qDid.length / totalQ) * 100;
@@ -235,6 +263,7 @@ function start() {
         
     }
 
+    let score = []
     //Função com event listener para guardar os dados de pergunta e resposta, avançar para a próxima pergunta e também a barra de progresso.
     const handleOptsClick = button => {
         if(correctAnswers.includes(button.innerHTML)) {
@@ -276,7 +305,7 @@ function start() {
     //Função para gerar o gabarito
     const feedback = () => {
         currentQNum.innerHTML = 'Gabarito'
-        askQ.innerHTML = 'Estes foram seus acertos e erros<span>:</span>'
+        question.innerHTML = 'Estes foram seus acertos e erros<span>:</span>'
         document.querySelector('button#feedback').style.display = 'none'
         const fdbck = document.createElement('p')
         fdbck.innerHTML = 'teste'
@@ -303,7 +332,7 @@ function start() {
 
     //         if (JSON.stringify(teclas) === JSON.stringify(sequencia)) {
     //             currentQNum.innerHTML = 'Pergunta <span>11</span>'
-    //             askQ.innerHTML = secretQuestion.question
+    //             question.innerHTML = secretQuestion.question
     //             let shuffledSecretOptions =  mixOpts([...secretQuestion.options])
                 
     //             qDidSecret.push(secretQuestion.question)
