@@ -21,7 +21,7 @@ function start() {
     let randomQ
     let optsBtns = [...document.querySelectorAll('button.options')]
     const currentQNum = document.querySelector('h2#questionNumber')
-    const question = document.querySelector('p#theQuestion')
+    const question = document.querySelector('p.question')
     const mainSect = document.querySelector('section#respond')
     const qAnswers = [ //Contém todas as perguntas e opções.
         {
@@ -246,7 +246,7 @@ function start() {
         //Opções embaralhadas.
         mixedOpts = mixOpts([...qAnswers[randomQIndex].options])
         question.innerHTML = randomQ;
-        for (let i in mixedOpts) {
+        for(let i in mixedOpts) {
             optsBtns[i].innerHTML = mixedOpts[i]
         }
 
@@ -297,20 +297,32 @@ function start() {
 
         resetBtn.remove()
         feedbackBtn.remove()
-
+        while (resQuestions.firstChild) {
+            resQuestions.firstChild.remove();
+        }
         doQuestion()
         progress()
     }
 
+    let resQuestions = document.querySelector('section#results')
     //Função para gerar o gabarito
     const feedback = () => {
         currentQNum.innerHTML = 'Gabarito'
         question.innerHTML = 'Estes foram seus acertos e erros<span>:</span>'
-        document.querySelector('button#feedback').style.display = 'none'
-        const fdbck = document.createElement('p')
-        fdbck.innerHTML = 'teste'
-        // const rightAndWrong 
-        mainSect.prepend(fdbck)
+        feedbackBtn.remove()
+        for(let i = 0; i < 10; i++) {
+            let rQuestion = document.createElement('p')
+            rQuestion.className = 'question'
+            rQuestion.innerHTML = correctAns[i].question
+            resQuestions.appendChild(rQuestion)
+
+            let rAns = document.createElement('p')
+            rAns.className = 'rightAns'
+            rAns.innerHTML = correctAns[i].chosenAns
+            
+
+            let wrong = document.createElement('p')
+        }
     }
 
     // document.querySelector('button#feedback').addEventListener('mouseup', feedback)

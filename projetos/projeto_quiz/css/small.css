@@ -35,7 +35,7 @@ h2 {
     font: normal bold 1.8em RobotoSlab;
 }
 
-p#theQuestion {
+p.question {
     font: normal bold 1.1em Rubik;
     text-wrap: wrap;
 }
