@@ -146,6 +146,14 @@ button#feedback {
     cursor: pointer;
 }
 
+p.rightAns {
+    color: green;
+}
+
+p.wrongAns {
+    color: red;
+}
+
 footer {
     text-align: center;
     text-shadow: 2px 2px 3px var(--pink);

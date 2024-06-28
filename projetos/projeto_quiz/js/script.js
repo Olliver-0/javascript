@@ -20,10 +20,12 @@ function start() {
     let randomQIndex
     let randomQ
     let optsBtns = [...document.querySelectorAll('button.options')]
+    let correctAns = []
+    let incorrectAns = []
     const currentQNum = document.querySelector('h2#questionNumber')
     const question = document.querySelector('p.question')
     const mainSect = document.querySelector('section#respond')
-    const qAnswers = [ //Contém todas as perguntas e opções.
+    const questionsAndOpts = [ //Contém todas as perguntas e opções.
         {
             question: 'Qual o resultado da expressão -14+5x(-3²)<span>?</span>',
             options: ['Aproximadamente 32.15', '0', '-59', '-63', 'Inválido']
@@ -42,7 +44,7 @@ function start() {
         },
         {
             question: 'O quinto número primo depois de 5 é<span>:</span>',
-            options: ['19', '5', '7', '11', '17']
+            options: ['19', '5', '7', '10', '17']
         },
         {
             question: 'Qual o idioma oficial do Peru<span>?</span>',
@@ -146,7 +148,7 @@ function start() {
         },
         
     ]
-    const correctAnswers = [ //Contém todas as respotas corretas.
+    const correctOpts = [ //Contém todas as respotas corretas.
         '-59',
         'Cristianismo',
         '60',
@@ -178,11 +180,13 @@ function start() {
         '118',
         'Japão'
     ]
+    // let correctAns = []
+    // let incorrectAns = []
     //Principal função. Faz uma pergunta aleatória e a coloca na tela com suas opções embaralhadas, também analisa se o quiz já foi finalizado, e mostra a tela final de conclusão do quiz.
     const doQuestion = () => {
         if(qNum > 10) { //Verifica se o quiz já foi finalizado.
             currentQNum.innerHTML = 'Parabéns<span>!</span> Você completou o Qui<span>z!</span> <span></span>'
-            switch(score.length) { //Mensagens de conclusão do quiz
+            switch(correctAns.length) { //Mensagens de conclusão do quiz
                 case 0:
                     question.innerHTML = 'Você acertou <span>0</span> de <span>10</span> perguntas. Tente de novo, você vai conseguir<span>!</span>'
                     break
@@ -239,12 +243,12 @@ function start() {
         }
 
         do { //Seleciona uma pergunta aleatória.
-            randomQIndex = Math.floor(Math.random() * qAnswers.length);
-            randomQ = qAnswers[randomQIndex].question;
+            randomQIndex = Math.floor(Math.random() * questionsAndOpts.length);
+            randomQ = questionsAndOpts[randomQIndex].question;
         } while (qDid.includes(randomQ));
 
         //Opções embaralhadas.
-        mixedOpts = mixOpts([...qAnswers[randomQIndex].options])
+        mixedOpts = mixOpts([...questionsAndOpts[randomQIndex].options])
         question.innerHTML = randomQ;
         for(let i in mixedOpts) {
             optsBtns[i].innerHTML = mixedOpts[i]
@@ -260,14 +264,15 @@ function start() {
     const progress = () => {
         const newWidth = (qDid.length / totalQ) * 100;
         document.querySelector('div#inProgressBar').style.width = `${newWidth}%`
-        
     }
 
-    let score = []
     //Função com event listener para guardar os dados de pergunta e resposta, avançar para a próxima pergunta e também a barra de progresso.
     const handleOptsClick = button => {
-        if(correctAnswers.includes(button.innerHTML)) {
-            score.push(button.innerHTML)
+        if(correctOpts.includes(button.innerHTML)) {
+            // correctAns.push(button.innerHTML)
+            correctAns.push({question: randomQ, chosenAns: button.innerHTML})
+        } else {
+            incorrectAns.push({question: randomQ, chosenAns: button.innerHTML})
         }
         qDid.push(randomQ)
         doQuestion()
@@ -282,7 +287,8 @@ function start() {
     const reset = () => {
         qNum = 1
         qDid = []
-        score = []
+        correctAns = []
+        incorrectAns = []
         
         optsBtns.forEach(button => button.remove())
         optsBtns = []
@@ -310,7 +316,8 @@ function start() {
         currentQNum.innerHTML = 'Gabarito'
         question.innerHTML = 'Estes foram seus acertos e erros<span>:</span>'
         feedbackBtn.remove()
-        for(let i = 0; i < 10; i++) {
+
+        for(let i = 0; i < correctAns.length; i++) {
             let rQuestion = document.createElement('p')
             rQuestion.className = 'question'
             rQuestion.innerHTML = correctAns[i].question
@@ -319,9 +326,19 @@ function start() {
             let rAns = document.createElement('p')
             rAns.className = 'rightAns'
             rAns.innerHTML = correctAns[i].chosenAns
-            
+            resQuestions.appendChild(rAns)
+        }
 
-            let wrong = document.createElement('p')
+        for(let i = 0; i < incorrectAns.length; i++) {
+            let wQuestion = document.createElement('p')
+            wQuestion.className = 'question'
+            wQuestion.innerHTML = incorrectAns[i].question
+            resQuestions.appendChild(wQuestion)
+
+            let wAns = document.createElement('p')
+            wAns.className = 'wrongAns'
+            wAns.innerHTML= incorrectAns[i].chosenAns
+            resQuestions.appendChild(wAns)
         }
     }
 
