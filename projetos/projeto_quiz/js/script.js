@@ -1,17 +1,5 @@
 'use strict'
-function start() {
-    //GABARITO??
-    //MAIS PERGUNTAS
-
-    //Função para embaralhar as opções
-    const mixOpts = array => {
-        for(let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
-    }
-
+function start() { //Função que inicia o código quando o DOM é carregado
     let mixedOpts = []
     let resetBtn
     let feedbackBtn
@@ -25,7 +13,7 @@ function start() {
     const currentQNum = document.querySelector('h2#questionNumber')
     const question = document.querySelector('p.question')
     const mainSect = document.querySelector('section#respond')
-    const questionsAndOpts = [ //Contém todas as perguntas e opções.
+    const questionsAndOpts = [
         {
             question: 'Qual o resultado da expressão -14+5x(-3²)<span>?</span>',
             options: ['Aproximadamente 32.15', '0', '-59', '-63', 'Inválido']
@@ -124,11 +112,11 @@ function start() {
         },
         {
             question: 'De quem é a famosa frase “Penso, logo existo”<span>?</span>',
-            options: ['René Descartes', 'Sócrates', 'Aristóteles', 'Plutão', 'Émile Durkheim']
+            options: ['René Descartes', 'Sócrates', 'Aristóteles', 'Platão', 'Émile Durkheim']
         },
         {
             question: 'Quais o menor e o maior país do mundo<span>?</span>',
-            options: ['Vaticano e Rússia', 'Portugal e China', 'Mônaco e China', 'China e Mônaco', 'Noruega e Brasil']
+            options: ['Vaticano e Rússia', 'Mônaco e Rússia', 'Portugal e China', 'China e Mônaco', 'Noruega e Brasil']
         },
         {
             question: 'Quais o segundo livro mais vendido do mundo<span>?</span>',
@@ -148,7 +136,7 @@ function start() {
         },
         
     ]
-    const correctOpts = [ //Contém todas as respotas corretas.
+    const correctOpts = [
         '-59',
         'Cristianismo',
         '60',
@@ -180,76 +168,88 @@ function start() {
         '118',
         'Japão'
     ]
-    // let correctAns = []
-    // let incorrectAns = []
-    //Principal função. Faz uma pergunta aleatória e a coloca na tela com suas opções embaralhadas, também analisa se o quiz já foi finalizado, e mostra a tela final de conclusão do quiz.
-    const doQuestion = () => {
-        if(qNum > 10) { //Verifica se o quiz já foi finalizado.
-            currentQNum.innerHTML = 'Parabéns<span>!</span> Você completou o Qui<span>z!</span> <span></span>'
-            switch(correctAns.length) { //Mensagens de conclusão do quiz
-                case 0:
-                    question.innerHTML = 'Você acertou <span>0</span> de <span>10</span> perguntas. Tente de novo, você vai conseguir<span>!</span>'
-                    break
-                case 1:
-                    question.innerHTML = 'Você acertou apenas <span>1</span> de <span>10</span> perguntas. Tente de novo, você vai conseguir<span>!</span>'
-                    break
-                case 2:
-                    question.innerHTML = 'Você acertou <span>2</span> de <span>10</span> perguntas. Não quer tentar mais uma vez<span>?</span>'
-                    break
-                case 3:
-                    question.innerHTML = 'Você acertou <span>3</span> de <span>10</span> perguntas. Pode fazer melhor<span>!</span>'
-                    break
-                case 4:
-                    question.innerHTML = 'Você acertou <span>4</span> de <span>10</span> perguntas. Você foi bem<span>!</span>'
-                    break
-                case 5:
-                    question.innerHTML = 'Você acertou <span>5</span> de <span>10</span> perguntas. Você foi bem<span>!</span>'
-                    break
-                case 6:
-                    question.innerHTML = 'Você acertou <span>6</span> de <span>10</span> perguntas. Isso foi ótimo<span>!</span>'
-                    break
-                case 7:
-                    question.innerHTML = 'Você acertou <span>7</span> de <span>10</span> perguntas. É uma boa pontuação<span>!</span>'
-                    break
-                case 8:
-                    question.innerHTML = 'Você acertou <span>8</span> de <span>10</span> perguntas. Isso foi ótimo<span>!</span>'
-                    break
-                case 9:
-                    question.innerHTML = 'Você acertou <span>9</span> de <span>10</span> perguntas. Que incrível<span>!</span>'
-                    break
-                case 10:
-                    question.innerHTML = 'Você acertou <span>10</span> de <span>10</span> perguntas. Você é um gênio<span>!</span>'
-                    break
-                default: 
-                    question.innerHTML = 'ERRO. REINICIE O SITE'/* 'Você acertou <span>11</span> de <span>10</span> perguntas. Insano! Então você encontrou a Pergunta <span>11</span>... Bem esperto<span>!</span>' */
-            }
 
-            resetBtn = document.createElement('button')
-            resetBtn.setAttribute('id', 'resetButton')
-            resetBtn.innerHTML = 'Reiniciar'
-            resetBtn.addEventListener('mouseup', reset)
-            mainSect.appendChild(resetBtn)
+    const mixOpts = array => { //Função para embaralhar as opções.
+        for(let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]]
+        }
+        return array
+    }
 
-            feedbackBtn = document.createElement('button')
-            feedbackBtn.setAttribute('id', 'feedback')
-            feedbackBtn.innerHTML = 'Gabarito'
-            feedbackBtn.addEventListener('mouseup', feedback)
-            mainSect.appendChild(feedbackBtn)
+    const endScreen = () => { //Função que verifica se o quiz já foi finalizado e exibe a tela final.
+        currentQNum.innerHTML = 'Parabéns<span>!</span> Você completou o Qui<span>z!</span> <span></span>'
+        switch(correctAns.length) { //Mensagens de conclusão do quiz.
+            case 0:
+                question.innerHTML = 'Você acertou <span>0</span> de <span>10</span> perguntas. Tente de novo, você vai conseguir<span>!</span>'
+                break
+            case 1:
+                question.innerHTML = 'Você acertou apenas <span>1</span> de <span>10</span> perguntas. Tente de novo, você vai conseguir<span>!</span>'
+                break
+            case 2:
+                question.innerHTML = 'Você acertou <span>2</span> de <span>10</span> perguntas. Não quer tentar mais uma vez<span>?</span>'
+                break
+            case 3:
+                question.innerHTML = 'Você acertou <span>3</span> de <span>10</span> perguntas. Pode fazer melhor<span>!</span>'
+                break
+            case 4:
+                question.innerHTML = 'Você acertou <span>4</span> de <span>10</span> perguntas. Você foi bem<span>!</span>'
+                break
+            case 5:
+                question.innerHTML = 'Você acertou <span>5</span> de <span>10</span> perguntas. Você foi bem<span>!</span>'
+                break
+            case 6:
+                question.innerHTML = 'Você acertou <span>6</span> de <span>10</span> perguntas. Isso foi ótimo<span>!</span>'
+                break
+            case 7:
+                question.innerHTML = 'Você acertou <span>7</span> de <span>10</span> perguntas. É uma boa pontuação<span>!</span>'
+                break
+            case 8:
+                question.innerHTML = 'Você acertou <span>8</span> de <span>10</span> perguntas. Isso foi ótimo<span>!</span>'
+                break
+            case 9:
+                question.innerHTML = 'Você acertou <span>9</span> de <span>10</span> perguntas. Que incrível<span>!</span>'
+                break
+            case 10:
+                question.innerHTML = 'Você acertou <span>10</span> de <span>10</span> perguntas. Você é um gênio<span>!</span>'
+                break
+            default: 
+                question.innerHTML = 'ERRO. REINICIE O SITE'/* 'Você acertou <span>11</span> de <span>10</span> perguntas. Insano! Então você encontrou a Pergunta <span>11</span>... Bem esperto<span>!</span>' */
+        }
 
-            optsBtns.forEach(button => {
-                button.remove()
-            })
+        //Criar botão para resetar quiz.
+        resetBtn = document.createElement('button')
+        resetBtn.setAttribute('id', 'resetButton')
+        resetBtn.innerHTML = 'Reiniciar'
+        resetBtn.addEventListener('mouseup', reset)
+        mainSect.appendChild(resetBtn)
+
+        //Criar botão para gabarito.
+        feedbackBtn = document.createElement('button')
+        feedbackBtn.setAttribute('id', 'feedback')
+        feedbackBtn.innerHTML = 'Gabarito'
+        feedbackBtn.addEventListener('mouseup', feedback)
+        mainSect.appendChild(feedbackBtn)
+
+        optsBtns.forEach(button => { //Remove todos os botões de opções.
+            button.remove()
+        })
+    }
+
+    const doQuestion = () => { //Principal função. Lida com o surgimento de perguntas e de botões.
+        if(qNum > 10) {
+            endScreen()
             return
         }
 
         do { //Seleciona uma pergunta aleatória.
-            randomQIndex = Math.floor(Math.random() * questionsAndOpts.length);
-            randomQ = questionsAndOpts[randomQIndex].question;
-        } while (qDid.includes(randomQ));
+            randomQIndex = Math.floor(Math.random() * questionsAndOpts.length)
+            randomQ = questionsAndOpts[randomQIndex].question
+        } while(qDid.includes(randomQ))
 
         //Opções embaralhadas.
         mixedOpts = mixOpts([...questionsAndOpts[randomQIndex].options])
-        question.innerHTML = randomQ;
+        question.innerHTML = randomQ
         for(let i in mixedOpts) {
             optsBtns[i].innerHTML = mixedOpts[i]
         }
@@ -259,17 +259,14 @@ function start() {
 
     window.addEventListener('load', doQuestion)
 
-    const totalQ = 10
-    //Função para avançar a barra de progresso a cada pergunta respondida.
-    const progress = () => {
-        const newWidth = (qDid.length / totalQ) * 100;
+    const progress = () => { //Função para avançar a barra de progresso a cada pergunta respondida.
+        const newWidth = (qDid.length / 10) * 100
         document.querySelector('div#inProgressBar').style.width = `${newWidth}%`
     }
 
-    //Função com event listener para guardar os dados de pergunta e resposta, avançar para a próxima pergunta e também a barra de progresso.
+    //Função para guardar os dados das questões, avançar o quiz, e avançar a barra de progresso.
     const handleOptsClick = button => {
         if(correctOpts.includes(button.innerHTML)) {
-            // correctAns.push(button.innerHTML)
             correctAns.push({question: randomQ, chosenAns: button.innerHTML})
         } else {
             incorrectAns.push({question: randomQ, chosenAns: button.innerHTML})
@@ -283,17 +280,15 @@ function start() {
         button.addEventListener('click', () => handleOptsClick(button))
     })
 
-    //Função para resetar o quiz, limpando dados armazenados.
-    const reset = () => {
+    const reset = () => { //Função para resetar o quiz, limpando dados armazenados.
+        optsBtns.forEach(button => button.remove())
+        optsBtns = []
         qNum = 1
         qDid = []
         correctAns = []
         incorrectAns = []
-        
-        optsBtns.forEach(button => button.remove())
-        optsBtns = []
 
-        for(let i = 0; i < 5; i++) {
+        for(let i = 0; i < 5; i++) { //Recriando botões de opções
             let btn = document.createElement('button')
             btn.className = 'options'
             btn.addEventListener('click', () => handleOptsClick(btn))
@@ -303,74 +298,48 @@ function start() {
 
         resetBtn.remove()
         feedbackBtn.remove()
-        while (resQuestions.firstChild) {
+        while(resQuestions.firstChild) {
             resQuestions.firstChild.remove();
         }
+
         doQuestion()
         progress()
     }
 
     let resQuestions = document.querySelector('section#results')
-    //Função para gerar o gabarito
-    const feedback = () => {
-        currentQNum.innerHTML = 'Gabarito'
-        question.innerHTML = 'Estes foram seus acertos e erros<span>:</span>'
-        feedbackBtn.remove()
 
-        for(let i = 0; i < correctAns.length; i++) {
+    const showAns = (array1, array2) => { //Função para mostrar as respostas corretas e incorretas.
+        for(let i = 0; i < array1.length; i++) {
             let rQuestion = document.createElement('p')
             rQuestion.className = 'question'
-            rQuestion.innerHTML = correctAns[i].question
+            rQuestion.innerHTML = array1[i].question
             resQuestions.appendChild(rQuestion)
 
             let rAns = document.createElement('p')
             rAns.className = 'rightAns'
-            rAns.innerHTML = correctAns[i].chosenAns
+            rAns.innerHTML = array1[i].chosenAns
             resQuestions.appendChild(rAns)
         }
 
-        for(let i = 0; i < incorrectAns.length; i++) {
+        for(let i = 0; i < array2.length; i++) {
             let wQuestion = document.createElement('p')
             wQuestion.className = 'question'
-            wQuestion.innerHTML = incorrectAns[i].question
+            wQuestion.innerHTML = array2[i].question
             resQuestions.appendChild(wQuestion)
 
             let wAns = document.createElement('p')
             wAns.className = 'wrongAns'
-            wAns.innerHTML= incorrectAns[i].chosenAns
+            wAns.innerHTML= array2[i].chosenAns
             resQuestions.appendChild(wAns)
         }
     }
 
-    // document.querySelector('button#feedback').addEventListener('mouseup', feedback)
+    const feedback = () => { //Função para gerar o gabarito.
+        currentQNum.innerHTML = 'Gabarito'
+        question.innerHTML = 'Estes foram seus acertos e erros<span>:</span>'
+        feedbackBtn.remove()
 
-    // const teclas = [];
-    // const sequencia = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a', 'Enter'];
-
-    // let qDidSecret = []
-
-    // window.addEventListener('keydown', (e) => {
-    //     if(qDidSecret.includes(secretQuestion.question)){
-    //         return
-    //     } else {
-    //         teclas.push(e.key);
-
-    //         if (teclas.length > sequencia.length) {
-    //             teclas.shift();
-    //         }
-
-    //         if (JSON.stringify(teclas) === JSON.stringify(sequencia)) {
-    //             currentQNum.innerHTML = 'Pergunta <span>11</span>'
-    //             question.innerHTML = secretQuestion.question
-    //             let shuffledSecretOptions =  mixOpts([...secretQuestion.options])
-                
-    //             qDidSecret.push(secretQuestion.question)
-    //             for (let i in shuffledSecretOptions) {
-    //                 answers[i].innerHTML = shuffledSecretOptions[i]
-    //             }
-    //             QNum--
-    //         }
-    //     }
-    // })
+        showAns(correctAns, incorrectAns)
+    }
 }
 document.addEventListener('DOMContentLoaded', start())
