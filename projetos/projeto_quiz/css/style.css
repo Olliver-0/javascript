@@ -122,8 +122,6 @@ button.options {
     cursor: pointer;
 }
 
-/* button.secret {} */
-
 button#resetButton {
     display: inline-block;
     background-color: var(--darkpurple);
@@ -136,7 +134,6 @@ button#resetButton {
 }
 
 button#feedback {
-    /* display: none; */
     background-color: var(--lightpink);
     border: 4px solid var(--pink);
     border-radius: 14px;
@@ -146,12 +143,26 @@ button#feedback {
     cursor: pointer;
 }
 
+section.sectQuestion {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: var(--pink);
+    border: 3px solid var(--lightpink);
+    border-radius: 7px;
+}
+
+section#results > p.question {
+    border-radius: 7px;
+}
+
 p.rightAns {
-    color: green;
+    background-color: rgb(0, 80, 0);
+    color: rgb(0, 240, 0);
 }
 
 p.wrongAns {
-    color: red;
+    background-color: rgb(80, 0, 0);
+    color: rgb(240, 0, 0);
 }
 
 footer {

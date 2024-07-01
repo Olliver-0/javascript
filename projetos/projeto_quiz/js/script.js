@@ -310,27 +310,35 @@ function start() { //Função que inicia o código quando o DOM é carregado
 
     const showAns = (array1, array2) => { //Função para mostrar as respostas corretas e incorretas.
         for(let i = 0; i < array1.length; i++) {
+            let rightAnsGroup = document.createElement('section')
+            rightAnsGroup.className = 'sectQuestion'
+            resQuestions.appendChild(rightAnsGroup)
+
             let rQuestion = document.createElement('p')
             rQuestion.className = 'question'
             rQuestion.innerHTML = array1[i].question
-            resQuestions.appendChild(rQuestion)
+            rightAnsGroup.appendChild(rQuestion)
 
             let rAns = document.createElement('p')
             rAns.className = 'rightAns'
             rAns.innerHTML = array1[i].chosenAns
-            resQuestions.appendChild(rAns)
+            rightAnsGroup.appendChild(rAns)
         }
 
         for(let i = 0; i < array2.length; i++) {
+            let wrongAnsGroup = document.createElement('section')
+            wrongAnsGroup.className = 'sectQuestion'
+            resQuestions.appendChild(wrongAnsGroup)
+
             let wQuestion = document.createElement('p')
             wQuestion.className = 'question'
             wQuestion.innerHTML = array2[i].question
-            resQuestions.appendChild(wQuestion)
+            wrongAnsGroup.appendChild(wQuestion)
 
             let wAns = document.createElement('p')
             wAns.className = 'wrongAns'
             wAns.innerHTML= array2[i].chosenAns
-            resQuestions.appendChild(wAns)
+            wrongAnsGroup.appendChild(wAns)
         }
     }
 
