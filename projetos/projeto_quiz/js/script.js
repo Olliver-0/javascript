@@ -134,7 +134,38 @@ function start() { //Função que inicia o código quando o DOM é carregado
             question: 'Qual país tem a maior expectativa de vida do mundo<span>?</span>',
             options: ['Coreia', 'Canadá', 'Serra Leoa', 'Europa', 'Japão']
         },
-        
+        {
+            question: 'Como é o nome do som produzido por um raio<span>?</span>',
+            options: ['Trovão', 'Trovoada', 'Trovejar', 'Relâmpago', 'Estrondo']
+        },
+        {
+            question: 'Quantos megabytes tem 1 gigabyte<span>?</span>',
+            options: ['1024', '1000', '100', '1155', '999']
+        },
+        {
+            question: 'Quais são sinônimos<span>?</span>',
+            options: ['Ódio e Amor', 'Desleixado e Desarranjado', 'Pequeno e Minúsculo', 'Começo e Fim', 'Salto e Alto']
+        },
+        {
+            question: 'Como se chama o criador de abelhas<span>?</span>',
+            options: ['Apicultor', 'Criador', 'Abelhador', 'Agricultor', 'Melzeiro']
+        },
+        {
+            question: 'Quais são as três cores primárias<span>?</span>',
+            options: ['Azul, vermelho e amarelo', 'Vermelho, azul e verde', 'Azul, amarelo e verde', 'Vermelho, amarelo e verde', 'Branco, preto e cinza']
+        },
+        {
+            question: 'Qual a marca mais famosa do mundo<span>?</span>',
+            options: ['Coca-Cola', 'Google', 'Apple', "McDonald's", 'Nike']
+        },
+        {
+            question: 'Como se classifica o leão<span>?</span>',
+            options: ['Mamífero', 'Canino', 'Ovíparo', 'Peçonhento', 'Rei da Selva']
+        },
+        {
+            question: 'Qual animal é conhecido por transmitir a leptospirose<span>?</span>',
+            options: ['Rato', 'Camundongo', 'Barata', 'Aedes Aegypti', 'Humano']
+        },
     ]
     const correctOpts = [
         '-59',
@@ -166,7 +197,15 @@ function start() { //Função que inicia o código quando o DOM é carregado
         'Dom Quixote',
         'Infinitas',
         '118',
-        'Japão'
+        'Japão',
+        'Trovão',
+        '1024',
+        'Desleixado e Desarranjado',
+        'Apicultor',
+        'Azul, vermelho e amarelo',
+        'Coca-Cola',
+        'Mamífero',
+        'Rato'
     ]
 
     const mixOpts = array => { //Função para embaralhar as opções.
