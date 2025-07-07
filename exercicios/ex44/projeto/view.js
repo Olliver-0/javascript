@@ -1,47 +1,24 @@
-// ARQUIVO: view.js
 // @ts-check
-
 import {} from './types.js';
 
 export class ConsoleView {
     /**
-     * Renderiza a interface no console com base no estado atual.
-     * @param {import('./types.js').AppState} state O estado completo da aplicação.
+     * @param {import('./types.js').AppState} state
      */
     render(state) {
         console.clear();
 
-        // if (state.isLoading) {
-        //     console.log('Buscando dados...');
-        //     return;
-        // }
-
-        // if (state.error) {
-        //     console.error(`❌ Erro: ${state.error}`);
-        //     return;
-        // }
-
-        // if (state.userInfo) {
-        //     this._renderUserInfo(state.userInfo);
-        //     this._renderRepos(state.repos);
-        // } else {
-        //     console.log("Inicie uma busca para ver as informações de um usuário.");
-        // }
-        //Com o estado refatorado, o switch fica excelente
         switch (state.status) {
             case 'loading':
                 console.log('Buscando dados...');
                 break;
-
             case 'error':
                 console.error(`❌ Erro: ${state.error}`);
                 break;
-                
             case 'success':
                 this._renderUserInfo(state.userInfo);
                 this._renderRepos(state.repos);
                 break;
-
             case 'idle':
             default:
                 console.log("Inicie uma busca para ver as informações de um usuário.");
@@ -72,7 +49,6 @@ export class ConsoleView {
             return;
         }
         
-        // Mostra os 5 mais recentes (a API já retorna mais ou menos nessa ordem)
         repos.slice(0, 5).forEach(repo => {
             console.log(`\n▶ ${repo.name}`);
             console.log(`  ${repo.description || 'Sem descrição.'}`);

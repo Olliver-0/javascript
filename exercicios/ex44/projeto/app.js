@@ -1,6 +1,4 @@
-// ARQUIVO: app.js
 // @ts-check
-
 import { GitHubService } from './api.js';
 import { ConsoleView } from './view.js';
 import {} from './types.js';
@@ -15,14 +13,8 @@ export class App {
         this.view = view;
 
         /** @type {import('./types.js').AppState} */
-        // this.state = {
-        //     userInfo: null,
-        //     repos: [],
-        //     error: null,
-        //     isLoading: false,
-        // };
         this.state = {
-            status: 'idle', // Valores possíveis: 'idle', 'loading', 'success', 'error'
+            status: 'idle',
             userInfo: null,
             repos: [],
             error: null
@@ -30,7 +22,6 @@ export class App {
     }
 
     /**
-     * Atualiza o estado e comanda a view para renderizar novamente.
      * @private
      * @param {Partial<import('./types.js').AppState>} newState
      */
@@ -40,7 +31,6 @@ export class App {
     }
 
     /**
-     * Inicia a busca por um usuário e gerencia o fluxo de dados.
      * @param {string} username
      */
     searchUser = async username => {

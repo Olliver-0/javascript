@@ -1,8 +1,6 @@
-// ARQUIVO: types.js
 // @ts-check
 
 /**
- * Define a estrutura de dados para as informações do usuário.
  * @typedef {object} UserInfo
  * @property {string} name
  * @property {string} login
@@ -13,7 +11,6 @@
  */
 
 /**
- * Define a estrutura de dados para as informações de um repositório.
  * @typedef {object} RepoInfo
  * @property {string} name
  * @property {string | null} description
@@ -21,7 +18,6 @@
  */
 
 /**
- * Define a estrutura do estado completo da nossa aplicação.
  * @typedef {object} AppState
  * @property {string} status
  * @property {UserInfo | null} userInfo
@@ -29,5 +25,4 @@
  * @property {string | null} error
  */
 
-// Export vazio para tratar este arquivo como um módulo e permitir a importação de tipos.
 export {};

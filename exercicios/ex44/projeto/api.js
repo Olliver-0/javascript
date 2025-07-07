@@ -1,7 +1,4 @@
-// ARQUIVO: api.js
 // @ts-check
-
-// Importa as definições para que o JSDoc as reconheça.
 import {} from './types.js';
 
 export class GitHubService {
@@ -11,7 +8,7 @@ export class GitHubService {
 
     /**
      * @private
-     * @param {string} endpoint O caminho da API a ser buscado.
+     * @param {string} endpoint
      * @returns {Promise<any>}
      */
     _fetchData = async endpoint => {
@@ -26,9 +23,8 @@ export class GitHubService {
     }
 
     /**
-     * Busca os dados do usuário e seus repositórios simultaneamente.
-     * @param {string} username O nome de usuário do GitHub.
-     * @returns {Promise<[import('./types.js').UserInfo, import('./types.js').RepoInfo[]]>} Uma tupla com as informações do usuário e a lista de repositórios.
+     * @param {string} username
+     * @returns {Promise<[import('./types.js').UserInfo, import('./types.js').RepoInfo[]]>}
      */
     fetchUserData = async username => {
         const [userInfo, repos] = await Promise.all([
