@@ -23,10 +23,10 @@
 /**
  * Define a estrutura do estado completo da nossa aplicação.
  * @typedef {object} AppState
+ * @property {string} status
  * @property {UserInfo | null} userInfo
  * @property {RepoInfo[]} repos
  * @property {string | null} error
- * @property {boolean} isLoading
  */
 
 // Export vazio para tratar este arquivo como um módulo e permitir a importação de tipos.

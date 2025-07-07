@@ -15,11 +15,17 @@ export class App {
         this.view = view;
 
         /** @type {import('./types.js').AppState} */
+        // this.state = {
+        //     userInfo: null,
+        //     repos: [],
+        //     error: null,
+        //     isLoading: false,
+        // };
         this.state = {
+            status: 'idle', // Valores possíveis: 'idle', 'loading', 'success', 'error'
             userInfo: null,
             repos: [],
-            error: null,
-            isLoading: false,
+            error: null
         };
     }
 
@@ -28,7 +34,7 @@ export class App {
      * @private
      * @param {Partial<import('./types.js').AppState>} newState
      */
-    _setState(newState) {
+    _setState = async newState => {
         Object.assign(this.state, newState);
         this.view.render(this.state);
     }
@@ -37,14 +43,14 @@ export class App {
      * Inicia a busca por um usuário e gerencia o fluxo de dados.
      * @param {string} username
      */
-    async searchUser(username) {
-        this._setState({ isLoading: true, error: null });
+    searchUser = async username => {
+        this._setState({ status: 'loading', error: null });
         try {
             const [userInfo, repos] = await this.service.fetchUserData(username);
-            this._setState({ isLoading: false, userInfo, repos });
+            this._setState({ status: 'success', userInfo, repos });
         } catch (error) {
             const errorMessage = error instanceof Error ? error.message : 'Ocorreu um erro desconhecido.';
-            this._setState({ isLoading: false, error: errorMessage, userInfo: null, repos: [] });
+            this._setState({ status: 'error', error: errorMessage, userInfo: null, repos: [] });
         }
     }
 }

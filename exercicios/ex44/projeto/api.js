@@ -14,7 +14,7 @@ export class GitHubService {
      * @param {string} endpoint O caminho da API a ser buscado.
      * @returns {Promise<any>}
      */
-    async _fetchData(endpoint) {
+    _fetchData = async endpoint => {
         const response = await fetch(`${this.baseURL}${endpoint}`);
         if (!response.ok) {
             if (response.status === 404) {
@@ -30,7 +30,7 @@ export class GitHubService {
      * @param {string} username O nome de usuário do GitHub.
      * @returns {Promise<[import('./types.js').UserInfo, import('./types.js').RepoInfo[]]>} Uma tupla com as informações do usuário e a lista de repositórios.
      */
-    async fetchUserData(username) {
+    fetchUserData = async username => {
         const [userInfo, repos] = await Promise.all([
             this._fetchData(`/users/${username}`),
             this._fetchData(`/users/${username}/repos`)

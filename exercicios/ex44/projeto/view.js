@@ -11,21 +11,41 @@ export class ConsoleView {
     render(state) {
         console.clear();
 
-        if (state.isLoading) {
-            console.log('Buscando dados...');
-            return;
-        }
+        // if (state.isLoading) {
+        //     console.log('Buscando dados...');
+        //     return;
+        // }
 
-        if (state.error) {
-            console.error(`❌ Erro: ${state.error}`);
-            return;
-        }
+        // if (state.error) {
+        //     console.error(`❌ Erro: ${state.error}`);
+        //     return;
+        // }
 
-        if (state.userInfo) {
-            this._renderUserInfo(state.userInfo);
-            this._renderRepos(state.repos);
-        } else {
-            console.log("Inicie uma busca para ver as informações de um usuário.");
+        // if (state.userInfo) {
+        //     this._renderUserInfo(state.userInfo);
+        //     this._renderRepos(state.repos);
+        // } else {
+        //     console.log("Inicie uma busca para ver as informações de um usuário.");
+        // }
+        //Com o estado refatorado, o switch fica excelente
+        switch (state.status) {
+            case 'loading':
+                console.log('Buscando dados...');
+                break;
+
+            case 'error':
+                console.error(`❌ Erro: ${state.error}`);
+                break;
+                
+            case 'success':
+                this._renderUserInfo(state.userInfo);
+                this._renderRepos(state.repos);
+                break;
+
+            case 'idle':
+            default:
+                console.log("Inicie uma busca para ver as informações de um usuário.");
+                break;
         }
     }
 

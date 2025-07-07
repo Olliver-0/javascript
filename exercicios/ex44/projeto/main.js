@@ -8,7 +8,7 @@ import { GitHubService } from './api.js';
 import { ConsoleView } from './view.js';
 import { App } from './app.js';
 
-async function main() {
+const main = async () => {
     // 1. Cria a interface para fazer a pergunta
     const rl = readline.createInterface({ input, output });
 
