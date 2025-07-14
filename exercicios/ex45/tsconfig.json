@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    // ----- Configuração de Módulos (A mais importante) -----
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+
+    // ----- Estrutura do Projeto -----
+    "rootDir": "./src",
+    "outDir": "./dist",
+
+    // ----- Padrão do JavaScript e Ambiente -----
+    "target": "ES2022",
+    "esModuleInterop": true,
+    
+    // ----- Qualidade de Código -----
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    
+    // ----- Performance -----
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*"] // Diz ao TypeScript para incluir todos os arquivos dentro da pasta 'src'
+}

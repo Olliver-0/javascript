@@ -1,0 +1,33 @@
+{
+	"name": "github-profile-viewer-ts",
+	"version": "1.0.0",
+	"description": "Um aplicativo de console que busca e exibe informações de perfis do GitHub, agora em TypeScript.",
+	"main": "dist/main.js",
+	"type": "module",
+	"scripts": {
+		"dev": "tsx watch src/main.ts",
+		"start": "tsx src/main.ts",
+		"build": "tsc"
+	},
+	"engines": {
+		"node": ">=18.0.0"
+	},
+	"keywords": [
+		"github",
+		"api",
+		"typescript",
+		"cli",
+		"node"
+	],
+	"author": {
+		"name": "Natã Gabriel de Oliveira",
+		"email": "nata.gabriel.de.oliveira@gmail.com",
+		"url": "https://github.com/Olliver-0"
+	},
+	"license": "MIT",
+	"devDependencies": {
+		"@types/node": "^20.14.9",
+		"tsx": "^4.16.2",
+		"typescript": "^5.5.2"
+	}
+}
